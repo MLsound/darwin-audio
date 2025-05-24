@@ -23,6 +23,8 @@ dependencies:
       - cffi==1.17.1
       - charset-normalizer==3.4.2
       - decorator==5.2.1
+      - ffmpeg-python==0.2.0
+      - future==1.0.0
       - idna==3.10
       - joblib==1.5.1
       - lazy-loader==0.4
