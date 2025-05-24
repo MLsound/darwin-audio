@@ -1,6 +1,7 @@
 import os
 import subprocess
 from dotenv import load_dotenv
+from time import perf_counter
 
 def run_peaq(ref_file, test_file, advanced=False):
     load_dotenv()
@@ -26,22 +27,27 @@ def run_peaq(ref_file, test_file, advanced=False):
 
     print(f"Running command: {' '.join(command)}")
 
+    start = perf_counter()
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
+        elapsed = perf_counter() - start
         print(result.stdout)
         if result.stderr:
             print("Stderr:")
             print(result.stderr)
+        print(f"⏰ Elapsed time: {elapsed:.3f} seconds")
     except FileNotFoundError:
         print(f"Error: 'peaq' command not found. Ensure it's in your PATH (either system-wide or via .env and this script).")
     except subprocess.CalledProcessError as e:
+        elapsed = perf_counter() - start
         print(f"Error running peaq command: {e}")
         print(f"Stdout: {e.stdout}")
         print(f"Stderr: {e.stderr}")
+        print(f"Elapsed time: {elapsed:.3f} seconds")
 
 if __name__ == "__main__":
-    ref_file_path = "/Users/alejandrolloveras/Documents/ESTUDIO/UBA/Materias/AE 1/Audio/media/Valicha notas.wav"
-    test_file_path = "/Users/alejandrolloveras/Documents/ESTUDIO/UBA/Materias/AE 1/Audio/media/Valicha notas.mp3"
+    ref_file_path = "./media/Valicha notas.wav"
+    test_file_path = "./media/Valicha notas.mp3"
 
     run_peaq(ref_file_path, test_file_path)
     #run_peaq(ref_file_path, test_file_path, advanced=True)
