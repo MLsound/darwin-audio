@@ -1,0 +1,11 @@
+# Common files
+.DS_Store
+.env
+.venv
+
+# Audio files
+/media
+*.mp3
+*.wav
+*.flac
+
