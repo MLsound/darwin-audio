@@ -7,7 +7,6 @@ from peaq import run_peaq
 #processed = None
 
 def printt(message,n=80):
-    print()
     sep = "="*int((n-len(message))/2)
     message = f' {message} '
     print(sep,message,sep)
@@ -126,8 +125,8 @@ def evaluate(file, params):
     return metrics
 
 if __name__ == "__main__":
-    #input_wav = "./media/Valicha notas.wav"
-    input_wav = "./media/test.wav"
+    input_wav = "./media/Valicha notas.wav"
+    #input_wav = "./media/test.wav"
     params = [None,None,None]
     metrics = evaluate(input_wav, params)
     print(metrics)
