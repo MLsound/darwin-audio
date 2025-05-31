@@ -17,7 +17,7 @@ def build_output(file: str) -> str:
         raise ValueError('El formato del archivo de origen debe ser .WAV')
     return f"{base}.mp3"
 
-def process_audio(file: str) -> float | None:
+def process_audio(file: str, params: list | None) -> float | None:
     global processed
     input_path = file
     output_path = build_output(file)
@@ -27,7 +27,7 @@ def process_audio(file: str) -> float | None:
     # Ensure the input path is absolute or correct relative to this script
     # For simplicity, let's assume paths are correct
 
-    success, compress_time = convert_wav_to_mp3(input_path, output_path) # (+) setup hyperparams
+    success, compress_time = convert_wav_to_mp3(input_path, output_path, params) # (+) setup hyperparams
 
     if success:
         print(f"⚙️  Orchestrator: Successfully converted '{input_path}' (Duration: {compress_time:.3f})")
@@ -87,7 +87,7 @@ def evaluate(file, params):
     print("TESTING HYPERPARAMETERS:", params)
 
     print("\n🗜️  STEP 1 - AUDIO COMPRESSION:")
-    compress_time = process_audio(file) # (+) config hyperparams
+    compress_time = process_audio(file, params) # (+) config hyperparams
     if compress_time: process_time += compress_time
 
     print("\n🌡️  STEP 2 - QUALITY EVALUATION:")
