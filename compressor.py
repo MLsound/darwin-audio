@@ -2,7 +2,7 @@ import ffmpeg
 from time import perf_counter
 import os
 
-def convert_wav_to_mp3(input_file: str, output_file: str, params: list | None = None) -> tuple[bool, float | None]:
+def convert_wav_to_mp3(input_file: str, output_file: str, params: dict | None = None) -> tuple[bool, float | None]:
     """
     Converts a WAV audio file to MP3 format using ffmpeg-python.
 
@@ -21,8 +21,15 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: list | None = 
     start = perf_counter()
 
     if params is not None:
-        print("PARAMETROS:", params)
-    
+        print(f"Processing with parameters: {params}")
+    else:
+        print("No additional parameters provided, using default settings.")
+        params = {
+            'audio_bitrate': '192',
+            'sample_rate': '41000'
+        }  # Default settings if no params are provided
+        print(f"Processing with parameters: {params}")
+
     # Basic input validation
     if not os.path.exists(input_file):
         message = f"Error: Input file not found at '{input_file}'"
@@ -31,16 +38,11 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: list | None = 
     
     try:
         (
-            # ffmpeg
-            # .input(input_file)
-            # .output(output_file, acodec='libmp3lame', audio_bitrate='192k')
-            # .run(overwrite_output=True, capture_stdout=True, capture_stderr=True)
-
             ffmpeg
             .input(input_file)
-            #.output(output_file, acodec='libmp3lame', abr='1', aq='1')
-            .output(output_file, acodec='libmp3lame', sample_fmt='s16p')
+            .output(output_file, acodec='libmp3lame', **params)  # Unpack the dictionary here
             .run(overwrite_output=True, capture_stdout=True, capture_stderr=True)
+        )
 
             # Apparently, if two conflicting parameters are specified,
             # ffmpeg-python will either use the latest one or raise an error.
@@ -52,6 +54,7 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: list | None = 
 
             # TRAINABLE
             # ar='48000': Sets the audio sample rate to 48 kHz.
+            # sample_fmt='s16': Sets the audio sample format to signed 16-bit integer.
             # audio_bitrate='192k': Sets the audio bitrate (CBR)
             # aq='1': Set the audio quality (VBR). This is an alias for -q:a.
             # abr='1': Set the audio quality (ABR).
@@ -83,7 +86,7 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: list | None = 
             # overwrite_output=True: Overwrites the output file if it already exists.
             # capture_stdout=True: Captures ffmpeg's standard output.
             # capture_stderr=True: Captures ffmpeg's standard error.
-        )
+    
         elapsed: float = perf_counter() - start
         print(f"Conversion successful: '{input_file}' converted to '{output_file}'")
         print(f"⏰ Elapsed time: {elapsed:.3f} seconds")

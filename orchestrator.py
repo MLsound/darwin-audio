@@ -5,6 +5,8 @@ from compressor import convert_wav_to_mp3 # Assuming the file is named audio_con
 from peaq import run_peaq
 
 #processed = None
+add_idx = True # If True, adds an index to the output file name
+idx = 0
 
 def printt(message,n=80):
     sep = "="*int((n-len(message))/2)
@@ -12,12 +14,15 @@ def printt(message,n=80):
     print(sep,message,sep)
 
 def build_output(file: str) -> str:
+    global idx
     base, ext = os.path.splitext(file)
     if ext.lower() != '.wav':
         raise ValueError('El formato del archivo de origen debe ser .WAV')
-    return f"{base}.mp3"
+    if add_idx:
+        idx += 1
+    return f"{base}{idx}.mp3"
 
-def process_audio(file: str, params: list | None) -> float | None:
+def process_audio(file: str, params: dict | None) -> float | None:
     global processed
     input_path = file
     output_path = build_output(file)
@@ -81,6 +86,7 @@ def get_file_size(file_path: str) -> int:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def evaluate(file, params):
+    global processed
     process_time = 0
     printt("Starting audio evaluation process")
     # (+) Recieve parameters to test
@@ -127,6 +133,18 @@ def evaluate(file, params):
 if __name__ == "__main__":
     input_wav = "./media/Valicha notas.wav"
     #input_wav = "./media/test.wav"
-    params = [None,None,None]
-    metrics = evaluate(input_wav, params)
-    print(metrics)
+
+    # params = {
+    #     'ar': '48000',
+    #     'sample_fmt': 'fltp',
+    #     'aq': '1',
+    #     'audio_bitrate': '192'
+    # }
+    params = [
+        {'sample_rate': '22000'},
+        {'audio_bitrate':'320'},
+        {'sample_rate': '22000','audio_bitrate':'320'},
+    ]
+    for param in params:
+        metrics = evaluate(input_wav, param)
+        print(metrics)
