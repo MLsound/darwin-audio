@@ -25,8 +25,8 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: dict | None = 
     else:
         print("No additional parameters provided, using default settings.")
         params = {
-            'audio_bitrate': '192',
-            'sample_rate': '41000'
+            'b:a': '128',
+            'ar': '44100'
         }  # Default settings if no params are provided
         print(f"Processing with parameters: {params}")
 
@@ -110,7 +110,9 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: dict | None = 
 
 if __name__ == "__main__":
     # Example usage:
-    input_wav = "./media/Valicha notas.wav"
-    output_mp3 = "./media/Valicha notas.mp3"
+    #input_wav = "./media/Valicha notas.wav"
+    #output_mp3 = "./media/Valicha notas.mp3"
+    input_wav = "./media/test.wav"
+    output_mp3 = "./media/test.mp3"
     
     convert_wav_to_mp3(input_wav, output_mp3)

@@ -4,7 +4,8 @@ import numpy as np
 from deap import base, creator, tools, algorithms
 from orchestrator import evaluate
 
-input_wav = "./media/Valicha notas.wav"
+#input_wav = "./media/Valicha notas.wav"
+input_wav = "./media/test.wav"
 verbose = False # Set to True for detailed output
 
 # For testing purposes, we will simulate the evaluate function.
@@ -20,7 +21,7 @@ verbose = False # Set to True for detailed output
 
 # --- Evolutionary Algorithm Parameters ---
 POPULATION_SIZE = 50
-MAX_GENERATIONS = 2
+MAX_GENERATIONS = 20
 P_CROSSOVER = 0.8  # Probabilidad de cruce
 P_MUTATION = 0.1   # Probabilidad de mutación
 
@@ -131,6 +132,8 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     Returns:
         tuple: A tuple of fitness values (file_size, peaq_score, distortion_index).
     """
+    print("\n\n") # Vertical space for clarity in output
+
     # Extract and process genes
     sample_rate_idx = int(round(individual[0]))
     # Clamp the index to ensure it's within valid range for SUPPORTED_SAMPLE_RATES
@@ -153,7 +156,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
         'compression_level': str(compression_level),
         'reservoir': str(reservoir)
     }
-    print(f"\nFFmpeg Params (before mode handling): {ffmpeg_params}")
+    if verbose: print(f"\nFFmpeg Params (before mode handling): {ffmpeg_params}")
 
     # Handle mutually exclusive encoding modes
     if encoding_mode == 0: # Use audio_bitrate (CBR)
@@ -170,14 +173,14 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     # Else, no bitrate/quality parameter will be added, which might default to FFmpeg's own.
     # It's better to ensure one of these is always set for LAME.
 
-    print(f"\nFFmpeg Params (after mode handling): {ffmpeg_params}")
+    if verbose: print(f"\nFFmpeg Params (after mode handling): {ffmpeg_params}")
 
     file_size = float('inf') # Initialize with a large value for minimization
     peaq_score = 0.0         # Initialize with a low value for maximization
     distortion_index = 0.0   # Initialize with a low value for maximization
 
     # Print current individual and its ffmpeg parameters for debugging/tracking
-    print(f"Evaluating Individual: {individual}")
+    print(f"🧬 Evaluating Individual: {individual}")
     print(f"  FFmpeg Params: {ffmpeg_params}")
 
     try:
