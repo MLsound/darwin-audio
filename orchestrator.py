@@ -131,8 +131,8 @@ def evaluate(file, params):
     return metrics
 
 if __name__ == "__main__":
-    # input_wav = "./media/Valicha notas.wav"
-    input_wav = "./media/test.wav"
+    input_wav = "./media/Valicha notas.wav"
+    #input_wav = "./media/test.wav"
 
     # params = {
     #     'ar': '48000',
@@ -142,8 +142,8 @@ if __name__ == "__main__":
     # }
     params = [
         {'ar': '22050'},
-        {'audio_bitrate':'320'},
-        {'ar': '22050','audio_bitrate':'320'},
+        {'b:a':'320k'},
+        {'ar': '22050','b:a':'320k'},
     ]
     for param in params:
         metrics = evaluate(input_wav, param)

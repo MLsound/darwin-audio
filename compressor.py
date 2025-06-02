@@ -25,7 +25,7 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: dict | None = 
     else:
         print("No additional parameters provided, using default settings.")
         params = {
-            'b:a': '128',
+            'b:a': '128k',
             'ar': '44100'
         }  # Default settings if no params are provided
         print(f"Processing with parameters: {params}")

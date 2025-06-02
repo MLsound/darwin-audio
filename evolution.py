@@ -4,8 +4,10 @@ import numpy as np
 from deap import base, creator, tools, algorithms
 from orchestrator import evaluate
 
+# Input WAV file path (any music file in WAV format)
 #input_wav = "./media/Valicha notas.wav"
 input_wav = "./media/test.wav"
+
 verbose = False # Set to True for detailed output
 
 # For testing purposes, we will simulate the evaluate function.
@@ -161,13 +163,13 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     # Handle mutually exclusive encoding modes
     if encoding_mode == 0: # Use audio_bitrate (CBR)
         bitrate_kbps = max(LOW_BITRATE, min(UP_BITRATE, int(round(mode_value)))) # Clamp to valid range
-        ffmpeg_params['audio_bitrate'] = f"{bitrate_kbps}"
+        ffmpeg_params['b:a'] = f"{bitrate_kbps}k"
     elif encoding_mode == 1: # Use aq (VBR Quality)
         quality_param = max(LOW_QUAL, min(UP_QUAL, round(mode_value))) # Clamp to valid range
         ffmpeg_params['aq'] = str(int(quality_param)) # aq expects integer
     elif encoding_mode == 2: # Use abr (Average Bitrate)
         bitrate_kbps = max(LOW_BITRATE, min(UP_BITRATE, int(round(mode_value)))) # Clamp to valid range
-        ffmpeg_params['audio_bitrate'] = f"{bitrate_kbps}"
+        ffmpeg_params['b:a'] = f"{bitrate_kbps}k"
         #abr_kbps = max(LOW_BITRATE, min(UP_BITRATE, int(round(mode_value)))) # Clamp to valid range
         ffmpeg_params['abr'] = str(True)
     # Else, no bitrate/quality parameter will be added, which might default to FFmpeg's own.
