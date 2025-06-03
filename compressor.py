@@ -2,7 +2,12 @@ import ffmpeg
 from time import perf_counter
 import os
 
-def convert_wav_to_mp3(input_file: str, output_file: str, params: dict | None = None) -> tuple[bool, float | None]:
+verbose = True # If True, prints additional information
+
+def convert_wav_to_mp3(input_file: str,
+                       output_file: str,
+                       params: dict | None = None,
+                       verbose_sdk: bool = True) -> tuple[bool, float | None]:
     """
     Converts a WAV audio file to MP3 format using ffmpeg-python.
 
@@ -15,13 +20,16 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: dict | None = 
             - bool: True if conversion was successful, False otherwise.
             - str: A message describing the outcome or error.
     """
+    global verbose
+    verbose = verbose_sdk
+
     # ffmpeg-python handles the underlying ffmpeg process.
     # It will raise an ffmpeg.Error if ffmpeg is not found or if the command fails.
 
     start = perf_counter()
 
     if params is not None:
-        print(f"Processing with parameters: {params}")
+        if verbose: print(f"Processing with parameters: {params}")
     else:
         print("No additional parameters provided, using default settings.")
         params = {
@@ -89,7 +97,7 @@ def convert_wav_to_mp3(input_file: str, output_file: str, params: dict | None = 
     
         elapsed: float = perf_counter() - start
         print(f"Conversion successful: '{input_file}' converted to '{output_file}'")
-        print(f"⏰ Elapsed time: {elapsed:.3f} seconds")
+        if verbose: print(f"⏰ Elapsed time: {elapsed:.3f} seconds")
         return True, elapsed
     
     except ffmpeg.Error as e:

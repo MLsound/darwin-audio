@@ -9,6 +9,8 @@ from time import perf_counter
 # or where this module resides.
 load_dotenv()
 
+verbose = True # If True, prints additional information
+
 def _setup_environment():
     """
     Sets up necessary environment variables for GStreamer and PEAQ.
@@ -28,7 +30,10 @@ def _setup_environment():
     if gstreamer_plugin_path:
         os.environ['GST_PLUGIN_PATH'] = f"{gstreamer_plugin_path}:{os.getenv('GST_PLUGIN_PATH', '')}"
 
-def run_peaq(ref_file: str, test_file: str, advanced: bool=False) -> tuple[subprocess.CompletedProcess | None, float | None]:
+def run_peaq(ref_file: str, 
+             test_file: str,
+             verbose_sdk: bool = True,
+             advanced: bool=False) -> tuple[subprocess.CompletedProcess | None, float | None]:
     """
     Runs the PEAQ command with the given reference and test audio files.
 
@@ -45,13 +50,15 @@ def run_peaq(ref_file: str, test_file: str, advanced: bool=False) -> tuple[subpr
     """
     _setup_environment() # Ensure environment variables are set for each call
 
+    global verbose
+    verbose = verbose_sdk
 
     command = ["peaq"]
     if advanced:
         command.append("--advanced")
     command.extend([ref_file, test_file])
 
-    print(f">> Running command: {' '.join(command)}")
+    if verbose: print(f">> Running command: {' '.join(command)}")
 
     start_time = perf_counter()
     try:
@@ -59,7 +66,7 @@ def run_peaq(ref_file: str, test_file: str, advanced: bool=False) -> tuple[subpr
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         elapsed = perf_counter() - start_time
 
-        print(f"⏰ Elapsed time: {elapsed:.3f} seconds")
+        if verbose: print(f"⏰ Elapsed time: {elapsed:.3f} seconds")
         metrics_value = result.stdout
         if result.stderr:
             print("Stderr:")

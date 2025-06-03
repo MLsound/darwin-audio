@@ -1,10 +1,11 @@
 # main_orchestrator.py
 import os
 import re
-from compressor import convert_wav_to_mp3 # Assuming the file is named audio_converter.py
+from compressor import convert_wav_to_mp3
 from peaq import run_peaq
 
 #processed = None
+verbose = True # If True, prints additional information
 add_idx = True # If True, adds an index to the output file name
 idx = 0
 
@@ -27,15 +28,12 @@ def process_audio(file: str, params: dict | None) -> float | None:
     input_path = file
     output_path = build_output(file)
 
-    print(f"Processing: '{input_path}' -> '{output_path}'")
+    if verbose: print(f"Processing: '{input_path}' -> '{output_path}'")
 
-    # Ensure the input path is absolute or correct relative to this script
-    # For simplicity, let's assume paths are correct
-
-    success, compress_time = convert_wav_to_mp3(input_path, output_path, params) # (+) setup hyperparams
+    success, compress_time = convert_wav_to_mp3(input_path, output_path, params, verbose) # (+) setup hyperparams
 
     if success:
-        print(f"⚙️  Orchestrator: Successfully converted '{input_path}' (Duration: {compress_time:.3f})")
+        if verbose: print(f"⚙️  Orchestrator: Successfully converted '{input_path}' (Duration: {compress_time:.3f})")
         processed = output_path
         return compress_time
     else:
@@ -85,19 +83,20 @@ def get_file_size(file_path: str) -> int:
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def evaluate(file, params):
-    global processed
+def evaluate(file, params, verbose_sdk: bool = True):
+    global processed, verbose
+    verbose = verbose_sdk
     process_time = 0
     printt("Starting audio evaluation process")
     # (+) Recieve parameters to test
-    print("TESTING HYPERPARAMETERS:", params)
+    if verbose: print("TESTING HYPERPARAMETERS:", params)
 
-    print("\n🗜️  STEP 1 - AUDIO COMPRESSION:")
+    print("\n🗜️  STEP 1 - AUDIO COMPRESSION")
     compress_time = process_audio(file, params) # (+) config hyperparams
     if compress_time: process_time += compress_time
 
-    print("\n🌡️  STEP 2 - QUALITY EVALUATION:")
-    result, metrics_time = run_peaq(file,processed)
+    print("\n🌡️  STEP 2 - QUALITY EVALUATION")
+    result, metrics_time = run_peaq(file, processed, verbose)
     if metrics_time: process_time += metrics_time
 
     # Adapt output format for extracting metrics
@@ -128,6 +127,7 @@ def evaluate(file, params):
 
     print(f"\n⏰ Process time: {process_time} seconds")
     printt("Finished evaluation")
+    print()
     return metrics
 
 if __name__ == "__main__":

@@ -2,16 +2,30 @@ import os
 import random as rnd
 import numpy as np
 from deap import base, creator, tools, algorithms
-from orchestrator import evaluate
+from orchestrator import evaluate, printt
 
+# INITIAL SETUP:
 # Input WAV file path (any music file in WAV format)
 #input_wav = "./media/Valicha notas.wav"
 input_wav = "./media/test.wav"
 
 verbose = False # Set to True for detailed output
 
-# For testing purposes, we will simulate the evaluate function.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# FOR TESTING PURPOSES:
+# Uncomment the following lines to simulate the evaluation function and comment import from orchestrator.py
+
 # def evaluate(file, params):
+#     """
+#     Simulated evaluation function that mimics the behavior of evaluating audio files.
+#     This is a placeholder for the actual evaluation logic.
+#     Args:
+#         file (str): Path to the audio file to evaluate.
+#         params (dict): Parameters for the evaluation.
+#     Returns:
+#         dict: Simulated metrics including size, PEAQ score, distortion index, and processing time.
+#     """
 #     print(f"Simulating evaluation for file: {file} with params: {params}")
 #     # Simulate some metrics for demonstration purposes
 #     return {
@@ -20,6 +34,8 @@ verbose = False # Set to True for detailed output
 #         'im': rnd.uniform(-4.0, 0.0),           # Simulated Distortion Index in range -4 to 0
 #         'time': rnd.uniform(0.1, 2.0)            # Simulated processing time in seconds
 #     }
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 # --- Evolutionary Algorithm Parameters ---
 POPULATION_SIZE = 50
@@ -134,7 +150,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     Returns:
         tuple: A tuple of fitness values (file_size, peaq_score, distortion_index).
     """
-    print("\n\n") # Vertical space for clarity in output
+    print("\n") # Vertical space for clarity in output
 
     # Extract and process genes
     sample_rate_idx = int(round(individual[0]))
@@ -143,7 +159,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     sample_rate = SR_CHOICES[sample_rate_idx] # Look up the actual sample rate
     # Map integer gene to actual sample format string
     sample_format_int = int(round(individual[1]))
-    sample_format = SAMPLE_FMT_MAP.get(sample_format_int, 's16') # Default to 's16' if invalid
+    sample_format = SAMPLE_FMT_MAP.get(sample_format_int, 's32p') # Default to 's32p' if invalid
 
     compression_level = int(round(individual[2]))
     reservoir = int(round(individual[3])) # Will be 0 or 1
@@ -183,11 +199,11 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 
     # Print current individual and its ffmpeg parameters for debugging/tracking
     print(f"🧬 Evaluating Individual: {individual}")
-    print(f"  FFmpeg Params: {ffmpeg_params}")
+    print(f"  FFmpeg Params: {ffmpeg_params}\n")
 
     try:
         # SHOULD CALL orchestrator.py here
-        metrics = evaluate(input_file_path, ffmpeg_params)
+        metrics = evaluate(input_file_path, ffmpeg_params, verbose)
 
         if metrics:
             file_size = metrics['size'] / 1024.0
@@ -224,14 +240,15 @@ def main_evolutionary_algorithm():
     algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
                               ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
-
-    print("\n--- Best Non-Dominated Individuals (Pareto Front) ---")
+    
+    print("\n\n")
+    printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
     for ind in hof:
         # Reconstruct and print human-readable parameters for the best individuals - UPDATED FOR SAMPLE RATE
         sample_rate_idx = int(round(ind[0]))
         sample_rate_idx = max(LOW_SR_IDX, min(UP_SR_IDX, sample_rate_idx)) # Clamp for display
         sample_rate = SR_CHOICES[sample_rate_idx] # Look up actual value
-        sample_format = SAMPLE_FMT_MAP.get(int(round(ind[1])), 's16')
+        sample_format = SAMPLE_FMT_MAP.get(int(round(ind[1])), 's32p')
         compression_level = int(round(ind[2]))
         reservoir = int(round(ind[3]))
         encoding_mode_idx = int(round(ind[4]))
@@ -257,7 +274,7 @@ def main_evolutionary_algorithm():
         print(f"  Reservoir: {bool(reservoir)}")
         print(f"  Encoding Mode: {mode_str}")
         print(f"  Raw Gene Values: {np.round(ind, 2)}")
-        print(f"  Fitness (Size MB, PEAQ, Distortion): {np.round(ind.fitness.values, 4)}")
+        print(f"  Fitness (Size MB, PEAQ, Distortion, Time): {np.round(ind.fitness.values, 4)}")
 
 
     return pop, stats, hof
