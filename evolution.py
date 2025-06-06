@@ -10,6 +10,7 @@ from orchestrator import evaluate, printt
 input_wav = "./media/test.wav"
 
 verbose = False # Set to True for detailed output
+debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -199,11 +200,11 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 
     # Print current individual and its ffmpeg parameters for debugging/tracking
     print(f"🧬 Evaluating Individual: {individual}")
-    print(f"  FFmpeg Params: {ffmpeg_params}\n")
+    print(f"   FFmpeg Params: {ffmpeg_params}\n")
 
     try:
         # SHOULD CALL orchestrator.py here
-        metrics = evaluate(input_file_path, ffmpeg_params, verbose)
+        metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug)
 
         if metrics:
             file_size = metrics['size'] / 1024.0
