@@ -94,7 +94,9 @@ N_DIM = 6 # (ar, sample_fmt, compression_level, reservoir, encoding_mode, mode_v
 # - minimize the first value (file_size)
 # - maximize the second value (peaq_score)
 # - maximize the third value (distortion_index)
-creator.create("FitnessMulti", base.Fitness, weights=(-1.0, 1.0, 1.0, -1.0))
+# - minimize the fourth value (processing_time)
+# creator.create("FitnessMulti", base.Fitness, weights=(-1.0, 1.0, 1.0, -1.0))
+creator.create("FitnessMulti", base.Fitness, weights=(-0.5, 1, 0.3, -0.05))
 creator.create("Individual", list, fitness=creator.FitnessMulti)
 
 toolbox = base.Toolbox()
