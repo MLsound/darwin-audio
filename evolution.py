@@ -11,6 +11,7 @@ input_wav = "./media/test.wav"
 
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
+count = 1 # Counter for evaluations, used for tracking
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -153,6 +154,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     Returns:
         tuple: A tuple of fitness values (file_size, peaq_score, distortion_index).
     """
+    global count
     print("\n") # Vertical space for clarity in output
 
     # Extract and process genes
@@ -201,12 +203,13 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     distortion_index = 0.0   # Initialize with a low value for maximization
 
     # Print current individual and its ffmpeg parameters for debugging/tracking
-    print(f"🧬 Evaluating Individual: {individual}")
+    print(f"🧬 Evaluating Individual {count}º: {individual}")
     print(f"   FFmpeg Params: {ffmpeg_params}\n")
 
     try:
         # SHOULD CALL orchestrator.py here
         metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug)
+        count += 1 # Increment count for each evaluation
 
         if metrics:
             file_size = metrics['size'] / 1024.0
