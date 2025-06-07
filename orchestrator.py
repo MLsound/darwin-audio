@@ -10,8 +10,8 @@ debug = False # If True, creates an output folder and adds an index to the outpu
 add_idx = False # If True, adds an index to the output file name
 idx = 0
 
-def printt(message,n=80):
-    sep = "="*int((n-len(message))/2)
+def printt(message,n=80, char='='):
+    sep = char*int((n-len(message))/2)
     message = f' {message} '
     print(sep,message,sep)
 

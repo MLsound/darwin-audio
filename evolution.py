@@ -241,7 +241,10 @@ def main_evolutionary_algorithm():
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
 
-    # Run the evolutionary algorithm (NSGA-II)
+    # Run the evolutionary algorithm (NSGA-II))
+    algo = "NSGA-II"
+    print("\n")
+    printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
     # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
     algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
@@ -250,7 +253,7 @@ def main_evolutionary_algorithm():
     print("\n\n")
     printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
     for ind in hof:
-        # Reconstruct and print human-readable parameters for the best individuals - UPDATED FOR SAMPLE RATE
+        # Reconstruct and print human-readable parameters for the best individuals
         sample_rate_idx = int(round(ind[0]))
         sample_rate_idx = max(LOW_SR_IDX, min(UP_SR_IDX, sample_rate_idx)) # Clamp for display
         sample_rate = SR_CHOICES[sample_rate_idx] # Look up actual value
@@ -292,4 +295,9 @@ if __name__ == "__main__":
         print(f"Error: Input file not found at {input_wav}")
         print("Please update 'input_wav' to a valid path.")
     else:
+        init_time = np.datetime64('now')
         final_pop, final_stats, final_hof = main_evolutionary_algorithm()
+        final_time = np.datetime64('now')
+
+        # Print the total execution time
+        print(f"\n\n ⏱️ Total Execution Time: {final_time - init_time}")
