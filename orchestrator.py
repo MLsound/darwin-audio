@@ -4,11 +4,13 @@ import re
 from compressor import convert_wav_to_mp3
 from peaq import run_peaq
 
-#processed = None
+# SETUP PARAMETERS
 verbose = True # If True, prints additional information
 debug = False # If True, creates an output folder and adds an index to the output file name
 add_idx = False # If True, adds an index to the output file name
+
 idx = 0
+processed = None
 
 def printt(message,n=80, char='='):
     sep = char*int((n-len(message))/2)
@@ -37,7 +39,7 @@ def process_audio(file: str, params: dict | None) -> float | None:
     global processed
     input_path = file
     output_path = build_output(file)
-
+    if debug and logger: logger.debug(output_path)
     if verbose: print(f"Processing: '{input_path}' -> '{output_path}'")
 
     success, compress_time = convert_wav_to_mp3(input_path, output_path, params, verbose) # (+) setup hyperparams
@@ -93,8 +95,9 @@ def get_file_size(file_path: str) -> int:
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False):
-    global processed, verbose, debug
+def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_file=None):
+    global processed, verbose, debug, logger
+    logger = log_file
     if debug_mode:
         debug = True
         print("⚠️  Debug mode enabled! All files will be saved in an 'output' folder with an index number.")
@@ -131,6 +134,7 @@ def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False):
         'peaq': objective_difference_grade,
         'im': distortion_index,
     }
+    if logger: logger.info(f"  >> Metrics: {metrics}")
 
     print("\nMETRICS:")
     print(f" - File size: {metrics['size']/ 1024:.2f} KB")

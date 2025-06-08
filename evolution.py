@@ -3,15 +3,22 @@ import random as rnd
 import numpy as np
 from deap import base, creator, tools, algorithms
 from orchestrator import evaluate, printt
+import logging
+from logger import setup_logger
 
 # INITIAL SETUP:
 # Input WAV file path (any music file in WAV format)
 #input_wav = "./media/Valicha notas.wav"
 input_wav = "./media/test.wav"
 
+algo = "NSGA-II" 
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 count = 1 # Counter for evaluations, used for tracking
+
+# Setup the logger for the evolutionary algorithm
+logger = setup_logger(algo, log_file="evolution.log",
+                    level=logging.DEBUG if debug else logging.INFO)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -205,10 +212,13 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     # Print current individual and its ffmpeg parameters for debugging/tracking
     print(f"🧬 Evaluating Individual {count}º: {individual}")
     print(f"   FFmpeg Params: {ffmpeg_params}\n")
+    logger.info(f"{count}º Individual: {ffmpeg_params}")
+    logger.debug(f"Genetic parameters: {individual}")
 
     try:
         # SHOULD CALL orchestrator.py here
-        metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug)
+        logger.debug(input_file_path)
+        metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug, log_file=logger)
         count += 1 # Increment count for each evaluation
 
         if metrics:
@@ -242,9 +252,12 @@ def main_evolutionary_algorithm():
     stats.register("max", np.max, axis=0)
 
     # Run the evolutionary algorithm (NSGA-II))
-    algo = "NSGA-II"
     print("\n")
     printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
+    logger.info("GENETIC ALGORITHM STARTED")
+    logger.debug(f"  Algorithm: {algo}")
+    logger.info(f"  Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
+    logger.info(f"  Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
     # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
     algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
@@ -299,5 +312,8 @@ if __name__ == "__main__":
         final_pop, final_stats, final_hof = main_evolutionary_algorithm()
         final_time = np.datetime64('now')
 
-        # Print the total execution time
-        print(f"\n\n ⏱️ Total Execution Time: {final_time - init_time}")
+        # Shows total execution time
+        total_time = final_time - init_time
+        print(f"\n\n ⏱️ Total Execution Time: {total_time}")
+        logger.info("EXECUTION FINISHED SUCCESSFULLY")
+        logger.info(f"Total Execution Time: {total_time}")
