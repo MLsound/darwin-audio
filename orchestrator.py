@@ -1,6 +1,7 @@
 # main_orchestrator.py
 import os
 import re
+import logging
 from compressor import convert_wav_to_mp3
 from peaq import run_peaq
 
@@ -36,13 +37,14 @@ def build_output(file: str) -> str:
         return f"{base}.mp3"
 
 def process_audio(file: str, params: dict | None) -> float | None:
-    global processed
+    global processed, logger
     input_path = file
     output_path = build_output(file)
-    if debug and logger: logger.debug(output_path)
+    if logger: logger.debug(f"Output: {output_path}")
     if verbose: print(f"Processing: '{input_path}' -> '{output_path}'")
+    if logger and verbose: (logging.getLogger(f"{logger.name}.orch")).debug('ORCHESTRATOR module loaded.')
 
-    success, compress_time = convert_wav_to_mp3(input_path, output_path, params, verbose) # (+) setup hyperparams
+    success, compress_time = convert_wav_to_mp3(input_path, output_path, params, verbose, log_file=logger) # (+) setup hyperparams
 
     if success:
         if verbose: print(f"⚙️  Orchestrator: Successfully converted '{input_path}' (Duration: {compress_time:.3f})")
@@ -97,12 +99,16 @@ def get_file_size(file_path: str) -> int:
 
 def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_file=None):
     global processed, verbose, debug, logger
+
     logger = log_file
+
     if debug_mode:
         debug = True
         print("⚠️  Debug mode enabled! All files will be saved in an 'output' folder with an index number.")
+
     verbose = verbose_sdk
     process_time = 0
+
     printt("Starting audio evaluation process")
     # (+) Recieve parameters to test
     if verbose: print("TESTING HYPERPARAMETERS:", params)
@@ -112,7 +118,7 @@ def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_fil
     if compress_time: process_time += compress_time
 
     print("\n🌡️  STEP 2 - QUALITY EVALUATION")
-    result, metrics_time = run_peaq(file, processed, verbose)
+    result, metrics_time = run_peaq(file, processed, verbose, log_file=logger)
     if metrics_time: process_time += metrics_time
 
     # Adapt output format for extracting metrics
@@ -134,7 +140,7 @@ def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_fil
         'peaq': objective_difference_grade,
         'im': distortion_index,
     }
-    if logger: logger.info(f"  >> Metrics: {metrics}")
+    if logger: logger.info(f" >> Metrics: {metrics}")
 
     print("\nMETRICS:")
     print(f" - File size: {metrics['size']/ 1024:.2f} KB")

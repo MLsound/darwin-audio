@@ -1,13 +1,15 @@
 import ffmpeg
 from time import perf_counter
 import os
+import logging
 
 verbose = True # If True, prints additional information
 
 def convert_wav_to_mp3(input_file: str,
                        output_file: str,
                        params: dict | None = None,
-                       verbose_sdk: bool = True) -> tuple[bool, float | None]:
+                       verbose_sdk: bool = True,
+                       log_file = None) -> tuple[bool, float | None]:
     """
     Converts a WAV audio file to MP3 format using ffmpeg-python.
 
@@ -22,6 +24,10 @@ def convert_wav_to_mp3(input_file: str,
     """
     global verbose
     verbose = verbose_sdk
+
+    if log_file:
+        comp_logger = logging.getLogger(f"{log_file.name}.comp")
+        if verbose: comp_logger.debug('COMPRESSOR module loaded.')
 
     # ffmpeg-python handles the underlying ffmpeg process.
     # It will raise an ffmpeg.Error if ffmpeg is not found or if the command fails.

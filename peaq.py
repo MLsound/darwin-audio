@@ -1,5 +1,6 @@
 import os
 import subprocess
+import logging
 from dotenv import load_dotenv
 from time import perf_counter
 
@@ -33,7 +34,8 @@ def _setup_environment():
 def run_peaq(ref_file: str, 
              test_file: str,
              verbose_sdk: bool = True,
-             advanced: bool=False) -> tuple[subprocess.CompletedProcess | None, float | None]:
+             advanced: bool = False,
+             log_file = None) -> tuple[subprocess.CompletedProcess | None, float | None]:
     """
     Runs the PEAQ command with the given reference and test audio files.
 
@@ -52,6 +54,10 @@ def run_peaq(ref_file: str,
 
     global verbose
     verbose = verbose_sdk
+
+    if log_file:
+        peaq_logger = logging.getLogger(f"{log_file.name}.peaq")
+        if verbose: peaq_logger.debug('PEAQ module loaded.')
 
     command = ["peaq"]
     if advanced:
