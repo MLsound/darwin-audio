@@ -6,21 +6,43 @@ from orchestrator import evaluate, printt
 import logging
 from logger import setup_logger
 import sys
+import pandas as pd
 
 # INITIAL SETUP:
 # Input WAV file path (any music file in WAV format)
 #input_wav = "./media/Valicha notas.wav"
 input_wav = "./media/test.wav"
-
-algo = "NSGA-II" 
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
-count = 1 # Counter for evaluations, used for tracking
+
+algo = "NSGA-II"
+history_filename = f"evolution_{algo}"
 
 # Setup the logger for the evolutionary algorithm
-logger = setup_logger(algo, log_file=f"logs/evolution_{algo}.log",
+logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
                     level=logging.DEBUG if debug else logging.INFO, console_output=verbose)
+count = 1 # Counter for evaluations, used for tracking
+df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time'])
 
+def save_csv(df, csv_file=f'history/{history_filename}.csv'):
+    """
+    Saves the DataFrame to a CSV file.
+    Args:
+        df (pd.DataFrame): The DataFrame to save.
+        csv_file (str): The name of the CSV file to save the DataFrame to.
+    """
+    if not csv_file.endswith('.csv'):
+        csv_file = f"{csv_file}.csv"
+    if df is None or df.empty:
+        print("DataFrame is empty. No data to save.")
+        return
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
+    # Save the DataFrame to CSV
+    df.to_csv(csv_file, index=False)
+    if verbose: print(f"Saving DataFrame to {csv_file}...")
+    logger.debug(f"(+) Saved DataFrame into {csv_file}")
+    
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # FOR TESTING PURPOSES:
@@ -235,6 +257,21 @@ def evaluate_ffmpeg_params(individual, input_file_path):
         peaq_score = 0.0
         distortion_index = 0.0
         processing_time = float('inf') # Penalize heavily for errors
+
+    finally:
+        if df is not None:
+            # Append the results to the DataFrame
+            df.loc[len(df)] = {
+                'params': ffmpeg_params,
+                'file_size': file_size,
+                'peaq_score': peaq_score,
+                'distortion_index': distortion_index,
+                'processing_time': processing_time
+            }
+
+            # Save DataFrame to CSV after each evaluation
+            if count % 50 == 0:  # Save checkpoints every 50 evaluations
+                save_csv(df)
     
     return file_size, peaq_score, distortion_index, processing_time
     
@@ -265,6 +302,7 @@ def main_evolutionary_algorithm():
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
                               ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
     
+    if df is not None: save_csv(df)
     print("\n\n")
     printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
     for ind in hof:
