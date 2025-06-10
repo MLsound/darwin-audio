@@ -103,7 +103,7 @@ def convert_wav_to_mp3(input_file: str,
             # capture_stderr=True: Captures ffmpeg's standard error.
     
         elapsed: float = perf_counter() - start
-        print(f"Conversion successful: '{input_file}' converted to '{output_file}'")
+        if verbose: comp_logger.debug(f"Conversion successful: '{input_file}' converted to '{output_file}'")
         if verbose: print(f"⏰ Elapsed time: {elapsed:.3f} seconds")
         return True, elapsed
     

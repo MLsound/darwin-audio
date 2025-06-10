@@ -13,6 +13,7 @@ verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
 algo = "NSGA-II"
+strategy_notebook = "Exploring different algorithms."
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
 
@@ -312,6 +313,7 @@ def main_evolutionary_algorithm():
     logger.info("GENETIC ALGORITHM STARTED")
     logger.info(f" Input: {input_wav}")
     logger.debug(f" Algorithm: {algo}")
+    logger.info(f" Strategy: {strategy_notebook}")
     logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
     logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
     # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
@@ -319,9 +321,12 @@ def main_evolutionary_algorithm():
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
                               ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
     
-    if df is not None: save_csv(df)
+    if df is not None: save_csv(df) # Store final results
+
     print("\n\n")
     printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
+    logger.info('HALL OF FAME (Pareto Front)')
+    hof_count = 0
     for ind in hof:
         # Reconstruct and print human-readable parameters for the best individuals
         sample_rate_idx = int(round(ind[0]))
@@ -346,7 +351,7 @@ def main_evolutionary_algorithm():
         else:
             mode_str = "Invalid Mode"
 
-        print(f"\nIndividual:")
+        print(f"\nIndividual {hof_count}:")
         print(f"  Sample Rate: {sample_rate} Hz")
         print(f"  Sample Format: {sample_format}")
         print(f"  Compression Level: {compression_level}")
@@ -370,7 +375,9 @@ def main_evolutionary_algorithm():
             'processing_time': ind.fitness.values[3]
         }
         
-        save_csv(hof_df, csv_file=f'results/{history_filename}.csv')
+        logger.info(f'Individual {hof_count}: {hof_df.iloc[-1].to_dict()}')
+        save_csv(hof_df, csv_file=f'results/{history_filename.replace("evolution","results")}.csv')
+        hof_count +=1
 
     return pop, stats, hof
 
