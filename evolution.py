@@ -7,6 +7,7 @@ import logging
 from logger import setup_logger
 import sys
 import pandas as pd
+from datetime import datetime
 
 # INITIAL SETUP:
 # Input WAV file path (any music file in WAV format)
@@ -16,7 +17,8 @@ verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
 algo = "NSGA-II"
-history_filename = f"evolution_{algo}"
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+history_filename = f"evolution_{algo}_{timestamp}"
 
 # Setup the logger for the evolutionary algorithm
 logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
