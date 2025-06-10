@@ -1,7 +1,7 @@
 import ffmpeg
 from time import perf_counter
 import os
-import logging
+from logger import getLogger
 
 verbose = True # If True, prints additional information
 
@@ -26,7 +26,8 @@ def convert_wav_to_mp3(input_file: str,
     verbose = verbose_sdk
 
     if log_file:
-        comp_logger = logging.getLogger(f"{log_file.name}.comp")
+        #comp_logger = logging.getLogger(f"{log_file.name}.comp")
+        comp_logger = getLogger(log_file.name,'comp')
         if verbose: comp_logger.debug('COMPRESSOR module loaded.')
 
     # ffmpeg-python handles the underlying ffmpeg process.

@@ -1,8 +1,8 @@
 import os
 import subprocess
-import logging
 from dotenv import load_dotenv
 from time import perf_counter
+from logger import getLogger
 
 # Load environment variables from .env file at the script level
 # This ensures that if this module is imported, environment variables are loaded
@@ -56,7 +56,8 @@ def run_peaq(ref_file: str,
     verbose = verbose_sdk
 
     if log_file:
-        peaq_logger = logging.getLogger(f"{log_file.name}.peaq")
+        #peaq_logger = logging.getLogger(f"{log_file.name}.peaq")
+        peaq_logger = getLogger(log_file.name,'peaq')
         if verbose: peaq_logger.debug('PEAQ module loaded.')
 
     command = ["peaq"]

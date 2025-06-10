@@ -60,6 +60,24 @@ def setup_logger(logger_name, log_file=None, level=logging.INFO, console_output=
 
     return logger
 
+def getLogger(logger_name, suffix):
+    return logging.getLogger(f"{logger_name}.{suffix}")
+
+def get_logger_filename(logger_obj):
+    """
+    Extracts the filename from a logger object if it's configured with a FileHandler.
+
+    Args:
+        logger_obj: The logging.Logger object.
+
+    Returns:
+        The filename (str) if found, otherwise None.
+    """
+    for handler in logger_obj.handlers:
+        if isinstance(handler, logging.FileHandler):
+            return handler.baseFilename
+    return None
+
 # --- Example of how to use this logger in another script ---
 if __name__ == '__main__':
     # This block will only run when logger.py is executed directly

@@ -3,7 +3,6 @@ import random as rnd
 import numpy as np
 from deap import base, creator, tools, algorithms
 from orchestrator import evaluate, printt
-import logging
 from logger import setup_logger
 import sys
 import pandas as pd
@@ -17,31 +16,31 @@ verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
 algo = "NSGA-II"
-timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
 
 # Setup the logger for the evolutionary algorithm
 logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
-                    level=logging.DEBUG if debug else logging.INFO, console_output=verbose)
+                    level='DEBUG' if debug else 'INFO', console_output=verbose)
 count = 1 # Counter for evaluations, used for tracking
 df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time'])
 
-def save_csv(df, csv_file=f'history/{history_filename}.csv'):
+def save_csv(data, csv_file=f'history/{history_filename}.csv'):
     """
     Saves the DataFrame to a CSV file.
     Args:
-        df (pd.DataFrame): The DataFrame to save.
+        data (pd.DataFrame): The DataFrame to save.
         csv_file (str): The name of the CSV file to save the DataFrame to.
     """
     if not csv_file.endswith('.csv'):
         csv_file = f"{csv_file}.csv"
-    if df is None or df.empty:
+    if data is None or data.empty:
         print("DataFrame is empty. No data to save.")
         return
     # Ensure the directory exists
     os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     # Save the DataFrame to CSV
-    df.to_csv(csv_file, index=False)
+    data.to_csv(csv_file, index=False)
     if verbose: print(f"Saving DataFrame to {csv_file}...")
     logger.debug(f"(+) Saved DataFrame into {csv_file}")
     
@@ -211,7 +210,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
         'compression_level': str(compression_level),
         'reservoir': str(reservoir)
     }
-    if verbose: print(f"\nFFmpeg Params (before mode handling): {ffmpeg_params}")
+    if debug: logger.debug(f"FFmpeg Params (before mode handling): {ffmpeg_params}")
 
     # Handle mutually exclusive encoding modes
     if encoding_mode == 0: # Use audio_bitrate (CBR)
@@ -228,7 +227,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     # Else, no bitrate/quality parameter will be added, which might default to FFmpeg's own.
     # It's better to ensure one of these is always set for LAME.
 
-    if verbose: print(f"\nFFmpeg Params (after mode handling): {ffmpeg_params}")
+    if debug: logger.debug(f"FFmpeg Params (after mode handling): {ffmpeg_params}")
 
     file_size = float('inf') # Initialize with a large value for minimization
     peaq_score = 0.0         # Initialize with a low value for maximization
@@ -352,7 +351,7 @@ if __name__ == "__main__":
 
     if "-d" in sys.argv or "--debug" in sys.argv:
         debug = True
-        logger.setLevel(logging.DEBUG)
+        logger.setLevel('DEBUG')
         if verbose: print("NOTE: Debug mode enabled by flag.")
 
     #global input_wav
@@ -365,6 +364,7 @@ if __name__ == "__main__":
             init_time = np.datetime64('now')
             final_pop, final_stats, final_hof = main_evolutionary_algorithm()
             final_time = np.datetime64('now')
+            total_time = final_time - init_time
             
         except KeyboardInterrupt:
             print("\n\nExecution interrupted by user (KeyboardInterrupt).")
@@ -377,7 +377,7 @@ if __name__ == "__main__":
             logger.exception("Unexpected exception occurred")
         finally:
             # Shows total execution time
-            total_time = final_time - init_time
-            print(f"\n\n ⏱️ Total Execution Time: {total_time}")
-            logger.info("EXECUTION FINISHED SUCCESSFULLY")
-            logger.info(f" > Total Execution Time: {total_time}")
+            if total_time:
+                print(f"\n\n ⏱️ Total Execution Time: {total_time}")
+                logger.info("EXECUTION FINISHED SUCCESSFULLY")
+                logger.info(f" > Total Execution Time: {total_time}")

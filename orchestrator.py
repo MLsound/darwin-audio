@@ -1,9 +1,9 @@
 # main_orchestrator.py
 import os
 import re
-import logging
 from compressor import convert_wav_to_mp3
 from peaq import run_peaq
+from logger import getLogger, get_logger_filename
 
 # SETUP PARAMETERS
 verbose = True # If True, prints additional information
@@ -24,10 +24,15 @@ def build_output(file: str) -> str:
     if ext.lower() != '.wav':
         raise ValueError('El formato del archivo de origen debe ser .WAV')
     if debug:
+        # Extract the same timestamp as the logger filename if available
+        if logger: timestamp = '_'.join(get_logger_filename(logger)
+                                       .split('/')[-1]
+                                       .split('.')[0]
+                                       .split('_')[-2:])
         add_idx = True
         # Create a subfolder named 'output' in the same directory as the input file
         folder_path = os.path.dirname(file)
-        output_folder = os.path.join(folder_path, "output")
+        output_folder = os.path.join(folder_path, f"output_{timestamp}")
         os.makedirs(output_folder, exist_ok=True)
         base = os.path.join(output_folder, os.path.basename(base))
     if add_idx:
@@ -42,7 +47,8 @@ def process_audio(file: str, params: dict | None) -> float | None:
     output_path = build_output(file)
     if logger: logger.debug(f"Output: {output_path}")
     if verbose: print(f"Processing: '{input_path}' -> '{output_path}'")
-    if logger and verbose: (logging.getLogger(f"{logger.name}.orch")).debug('ORCHESTRATOR module loaded.')
+    #if logger and verbose: (logging.getLogger(f"{logger.name}.orch")).debug('ORCHESTRATOR module loaded.')
+    if logger and verbose: getLogger(logger.name,'orch').debug('ORCHESTRATOR module loaded.')
 
     success, compress_time = convert_wav_to_mp3(input_path, output_path, params, verbose, log_file=logger) # (+) setup hyperparams
 
