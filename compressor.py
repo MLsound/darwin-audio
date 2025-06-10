@@ -125,8 +125,8 @@ def convert_wav_to_mp3(input_file: str,
 
 if __name__ == "__main__":
     # Example usage:
-    #input_wav = "./media/Valicha notas.wav"
-    #output_mp3 = "./media/Valicha notas.mp3"
+    #input_wav = "./media/Valicha.wav"
+    #input_wav = "./media/Valicha.mp3"
     input_wav = "./media/test.wav"
     output_mp3 = "./media/test.mp3"
     

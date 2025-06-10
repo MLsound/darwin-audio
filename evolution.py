@@ -9,9 +9,6 @@ import pandas as pd
 from datetime import datetime
 
 # INITIAL SETUP:
-# Input WAV file path (any music file in WAV format)
-#input_wav = "./media/Valicha notas.wav"
-input_wav = "./media/test.wav"
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
@@ -19,10 +16,26 @@ algo = "NSGA-II"
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
 
+# AUDIO FILES
+# Test files:
+# Input WAV file path (any music file in WAV format)
+# input_wav = "./media/test.wav" # For development purposes only (5sec|32kHz|16bits)
+# input_wav = "./media/2test.wav" # Studio recording (10sec|44,1kHz|16bits)
+# input_wav = "./media/3test.wav" # Homestudio recording (15sec|44,1kHz|24bits)
+input_wav = "./media/4test.wav" # String concert recording (11sec|96kHz|24bits)
+
+# Full songs:
+#input_wav = "./media/Valicha.wav" # Piano song (4.5min|44,1kHz|24bits)
+#input_wav = "./media/Shining_moon.wav" # Band Studio recording (4min|44,1kHz|16bits) aka 2test
+#input_wav = "./media/Mamita.wav" # Band Homestudio recording (2min|44,1kHz|24bits) aka 3test
+#input_wav = "./media/Bartok.wav" # String concert (33min|96kHz|24bits) aka 4test
+#input_wav = "./media/Bffmpeg -ss 00:00:00 -i Bartok_cut.wav -to 00:00:12 -c:a pcm_s32le 4test.wavartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
+
 # Setup the logger for the evolutionary algorithm
 logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
                     level='DEBUG' if debug else 'INFO', console_output=verbose)
 count = 1 # Counter for evaluations, used for tracking
+total_time = None
 df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time'])
 hof_df = df.copy() # Hall of fame DataFrame for best individuals
 
@@ -187,6 +200,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
         tuple: A tuple of fitness values (file_size, peaq_score, distortion_index).
     """
     global count
+    metrics = None
     print("\n") # Vertical space for clarity in output
 
     # Extract and process genes
@@ -255,20 +269,21 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     except Exception as e:
         logger.exception(f"General Error during evaluation for individual {individual}: {e}")
         print(f"General Error during evaluation for individual {individual}: {e}")
+        metrics = None
         file_size = float('inf')
         peaq_score = 0.0
         distortion_index = 0.0
         processing_time = float('inf') # Penalize heavily for errors
 
     finally:
-        if df is not None:
+        if metrics is not None and isinstance(df, pd.DataFrame):
             # Append the results to the DataFrame
             df.loc[len(df)] = {
-                'params': ffmpeg_params,
-                'file_size': file_size,
-                'peaq_score': peaq_score,
-                'distortion_index': distortion_index,
-                'processing_time': processing_time
+            'params': ffmpeg_params,
+            'file_size': file_size,
+            'peaq_score': peaq_score,
+            'distortion_index': distortion_index,
+            'processing_time': processing_time
             }
 
             # Save DataFrame to CSV after each evaluation
@@ -372,7 +387,7 @@ if __name__ == "__main__":
         if verbose: print("NOTE: Debug mode enabled by flag.")
 
     #global input_wav
-    input_wav = "./media/Valicha notas.wav"
+    
     if not os.path.exists(input_wav):
         print(f"Error: Input file not found at {input_wav}")
         print("Please update 'input_wav' to a valid path.")

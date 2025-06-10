@@ -160,8 +160,8 @@ def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_fil
     return metrics
 
 if __name__ == "__main__":
-    input_wav = "./media/Valicha notas.wav"
-    #input_wav = "./media/test.wav"
+    #input_wav = "./media/Valicha.wav"
+    input_wav = "./media/test.wav"
 
     # params = {
     #     'ar': '48000',

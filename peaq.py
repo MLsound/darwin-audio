@@ -95,8 +95,8 @@ def run_peaq(ref_file: str,
         return None, elapsed
 
 if __name__ == "__main__":
-    ref_file_path = "./media/Valicha notas.wav"
-    test_file_path = "./media/Valicha notas.mp3"
+    ref_file_path = "./media/Valicha.wav"
+    test_file_path = "./media/Valicha.mp3"
 
     run_peaq(ref_file_path, test_file_path)
     #run_peaq(ref_file_path, test_file_path, advanced=True)
