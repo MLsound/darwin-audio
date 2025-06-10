@@ -24,6 +24,7 @@ logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
                     level='DEBUG' if debug else 'INFO', console_output=verbose)
 count = 1 # Counter for evaluations, used for tracking
 df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time'])
+hof_df = df.copy() # Hall of fame DataFrame for best individuals
 
 def save_csv(data, csv_file=f'history/{history_filename}.csv'):
     """
@@ -339,6 +340,22 @@ def main_evolutionary_algorithm():
         print(f"  Raw Gene Values: {np.round(ind, 2)}")
         print(f"  Fitness (Size MB, PEAQ, Distortion, Time): {np.round(ind.fitness.values, 4)}")
 
+        # Save this individual's data to CSV
+        hof_df.loc[len(hof_df)] = {
+            'params': {
+            'sample_rate': sample_rate,
+            'sample_format': sample_format,
+            'compression_level': compression_level,
+            'reservoir': bool(reservoir),
+            'encoding_mode': mode_str
+            },
+            'file_size': ind.fitness.values[0],
+            'peaq_score': ind.fitness.values[1],
+            'distortion_index': ind.fitness.values[2],
+            'processing_time': ind.fitness.values[3]
+        }
+        
+        save_csv(hof_df, csv_file=f'results/{history_filename}.csv')
 
     return pop, stats, hof
 
