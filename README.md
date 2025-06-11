@@ -51,6 +51,9 @@ For system-level tools, you'll need to use your operating system's package manag
 * `peaq.py`: Provides an interface to the external `peaq` command-line tool, used for objective perceptual audio quality measurements. It also manages environment variables for correct tool execution.
 * `audiofile_analysis.ipynb`: A Jupyter Notebook for quick analysis of audio file properties (e.g., sample rate, bitrate) using `pydub`.
 * `./media/`: Directory intended for input WAV files and generated MP3 output files.
+* `./logs/`: Contains log files (.log) detailing the execution flow, debugging information, and significant events of the evolutionary algorithm. Each run generates a timestamped log file.
+* `./history/`: Stores CSV files (.csv) containing the full evolutionary history, including parameters, fitness values (file size, PEAQ score, distortion index), and processing time for each evaluated individual. Each run generates a timestamped CSV for distinct record-keeping.
+* `./results/`: Holds processed output or final outcome files (e.g., CSVs of the best-performing individuals or specific analysis results) from the evolutionary runs (HOF).
 
 ## 📚 References
 
