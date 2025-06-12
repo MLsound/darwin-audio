@@ -47,7 +47,6 @@ def process_audio(file: str, params: dict | None) -> float | None:
     output_path = build_output(file)
     if logger: logger.debug(f"Output: {output_path}")
     if verbose: print(f"Processing: '{input_path}' -> '{output_path}'")
-    #if logger and verbose: (logging.getLogger(f"{logger.name}.orch")).debug('ORCHESTRATOR module loaded.')
     if logger and verbose: getLogger(logger.name,'orch').debug('ORCHESTRATOR module loaded.')
 
     success, compress_time = convert_wav_to_mp3(input_path, output_path, params, verbose, log_file=logger) # (+) setup hyperparams
@@ -98,6 +97,7 @@ def get_file_size(file_path: str) -> int:
         size_in_bytes = os.path.getsize(file_path)
         return size_in_bytes
     except OSError as e:
+        if logger: logger.error(f"Error accessing file '{file_path}': {e}")
         print(f"Error accessing file '{file_path}': {e}")
         return -1
 

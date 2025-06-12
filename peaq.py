@@ -56,7 +56,6 @@ def run_peaq(ref_file: str,
     verbose = verbose_sdk
 
     if log_file:
-        #peaq_logger = logging.getLogger(f"{log_file.name}.peaq")
         peaq_logger = getLogger(log_file.name,'peaq')
         if verbose: peaq_logger.debug('PEAQ module loaded.')
 
@@ -82,6 +81,7 @@ def run_peaq(ref_file: str,
         return metrics_value, elapsed
 
     except FileNotFoundError:
+        peaq_logger.error("'peaq' command not found.")
         print(f"Error: 'peaq' command not found. Ensure it's in your PATH (either system-wide or via .env and this script).")
         return None, None
     except subprocess.CalledProcessError as e:
@@ -92,6 +92,7 @@ def run_peaq(ref_file: str,
         print(f"- Stdout: {e.stdout}")
         print(f"- Stderr: {e.stderr}")
         print(f"Elapsed time: {elapsed:.3f} seconds")
+        peaq_logger.error(f"Error running PEAQ command: {e}")
         return None, elapsed
 
 if __name__ == "__main__":
