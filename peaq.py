@@ -2,7 +2,7 @@ import os
 import subprocess
 from dotenv import load_dotenv
 from time import perf_counter
-from logger import getLogger
+from logger import getLogger, get_handler
 
 # Load environment variables from .env file at the script level
 # This ensures that if this module is imported, environment variables are loaded
@@ -57,6 +57,7 @@ def run_peaq(ref_file: str,
 
     if log_file:
         peaq_logger = getLogger(log_file.name,'peaq')
+        peaq_logger.addHandler(get_handler()) # Allowing console printing
         if verbose: peaq_logger.debug('PEAQ module loaded.')
 
     command = ["peaq"]
@@ -82,17 +83,16 @@ def run_peaq(ref_file: str,
 
     except FileNotFoundError:
         peaq_logger.error("'peaq' command not found.")
-        print(f"Error: 'peaq' command not found. Ensure it's in your PATH (either system-wide or via .env and this script).")
+        print(f"Ensure it's in your PATH (either system-wide or via .env and this script).")
         return None, None
     except subprocess.CalledProcessError as e:
         elapsed = perf_counter() - start_time
-        print(f"Error running PEAQ command: {e}")
-        print(f"- Command: '{e.cmd}'")
-        print(f"- Return code: {e.returncode}")
-        print(f"- Stdout: {e.stdout}")
-        print(f"- Stderr: {e.stderr}")
-        print(f"Elapsed time: {elapsed:.3f} seconds")
         peaq_logger.error(f"Error running PEAQ command: {e}")
+        peaq_logger.debug(f"- Command: '{e.cmd}'")
+        peaq_logger.debug(f"- Return code: {e.returncode}")
+        peaq_logger.debug(f"- Stdout: {e.stdout}")
+        peaq_logger.debug(f"- Stderr: {e.stderr}")
+        peaq_logger.debug(f"Elapsed time: {elapsed:.3f} seconds")
         return None, elapsed
 
 if __name__ == "__main__":

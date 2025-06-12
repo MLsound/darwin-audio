@@ -78,6 +78,14 @@ def get_logger_filename(logger_obj):
             return handler.baseFilename
     return None
 
+def get_handler():
+    # 2. Dynamically add a StreamHandler to comp_logger to enable console output
+    console_handler = logging.StreamHandler(sys.stdout)
+    # formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    # console_handler.setFormatter(formatter)
+    console_handler.setLevel(logging.INFO)
+    return console_handler
+
 # --- Example of how to use this logger in another script ---
 if __name__ == '__main__':
     # This block will only run when logger.py is executed directly

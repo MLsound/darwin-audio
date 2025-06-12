@@ -406,17 +406,17 @@ if __name__ == "__main__":
             total_time = final_time - init_time
             
         except KeyboardInterrupt:
+            logger.warning("KeyboardInterrupt: execution interrupted by user")
             print("\n\nExecution interrupted by user (KeyboardInterrupt).")
-            logger.warning("Execution interrupted by user (KeyboardInterrupt).")
         except FileNotFoundError as fnf_error:
-            print(f"\n\nFile not found error: {fnf_error}")
             logger.error(f"FileNotFoundError: {fnf_error}")
+            print(f"\n\nFile not found error: {fnf_error}")
         except Exception as e:
+            logger.exception(f"Exception error: {e}")
             print(f"\n\nAn unexpected error occurred: {e}")
-            logger.exception("Unexpected exception occurred")
         finally:
             # Shows total execution time
             if total_time:
-                print(f"\n\n ⏱️ Total Execution Time: {total_time}")
                 logger.info("EXECUTION FINISHED SUCCESSFULLY")
                 logger.info(f" > Total Execution Time: {total_time}")
+                print(f"\n\n ⏱️ Total Execution Time: {total_time}")

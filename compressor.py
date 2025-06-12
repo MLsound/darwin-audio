@@ -1,7 +1,7 @@
 import ffmpeg
 from time import perf_counter
 import os
-from logger import getLogger
+from logger import getLogger, get_handler
 
 verbose = True # If True, prints additional information
 
@@ -27,6 +27,7 @@ def convert_wav_to_mp3(input_file: str,
 
     if log_file:
         comp_logger = getLogger(log_file.name,'comp')
+        comp_logger.addHandler(get_handler()) # Allowing console printing
         if verbose: comp_logger.debug('COMPRESSOR module loaded.')
 
     # ffmpeg-python handles the underlying ffmpeg process.
@@ -109,23 +110,17 @@ def convert_wav_to_mp3(input_file: str,
     except ffmpeg.Error as e:
         elapsed = perf_counter() - start
         comp_logger.error(f"Error during conversion (after {elapsed:.3f} seconds):")
-        comp_logger.error(f"Stdout: {e.stdout.decode('utf8') if e.stdout else 'N/A'}")
-        comp_logger.error(f"Stderr: {e.stderr.decode('utf8') if e.stderr else 'N/A'}")
-        print(f"Error during conversion (after {elapsed:.3f} seconds):")
-        print(f"Stdout: {e.stdout.decode('utf8') if e.stdout else 'N/A'}")
-        print(f"Stderr: {e.stderr.decode('utf8') if e.stderr else 'N/A'}")
+        comp_logger.debug(f"Stdout: {e.stdout.decode('utf8') if e.stdout else 'N/A'}")
+        comp_logger.debug(f"Stderr: {e.stderr.decode('utf8') if e.stderr else 'N/A'}")
         return False, elapsed
 
     except FileNotFoundError:
         comp_logger.error("Error: The 'ffmpeg' executable was not found.")
-        comp_logger.error("Please ensure FFmpeg is installed on your system and its location is in your system's PATH environmental variable.")
-        print("Error: The 'ffmpeg' executable was not found.")
         print("Please ensure FFmpeg is installed on your system and its location is in your system's PATH environmental variable.")
         return False, None
 
     except Exception as e:
         comp_logger.exception(f"An unexpected error occurred: {e}")
-        print(f"An unexpected error occurred: {e}")
         return False, None
 
 if __name__ == "__main__":
