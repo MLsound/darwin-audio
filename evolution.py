@@ -64,7 +64,7 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 # FOR TESTING PURPOSES:
 # Uncomment the following lines to simulate the evaluation function and comment import from orchestrator.py
 
-# def evaluate(file, params):
+# def evaluate(file, params, verbose, debug_mode, log_file):
 #     """
 #     Simulated evaluation function that mimics the behavior of evaluating audio files.
 #     This is a placeholder for the actual evaluation logic.
@@ -77,11 +77,14 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 #     print(f"Simulating evaluation for file: {file} with params: {params}")
 #     # Simulate some metrics for demonstration purposes
 #     return {
-#         'size': rnd.randint(1000000, 5000000),  # Simulated file size in bytes
+#         'size': rnd.randint(50000, 500000),  # Simulated file size in bytes
 #         'peaq': rnd.uniform(-4.0, 0.0),         # Simulated PEAQ score in range -4 to 0
 #         'im': rnd.uniform(-4.0, 0.0),           # Simulated Distortion Index in range -4 to 0
-#         'time': rnd.uniform(0.1, 2.0)            # Simulated processing time in seconds
+#         'time': rnd.uniform(0.01, 2.0)            # Simulated processing time in seconds
 #     }
+
+# def printt(value,n=None,char=None):
+#     print(value)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
