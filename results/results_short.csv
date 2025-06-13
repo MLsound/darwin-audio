@@ -1,0 +1,7 @@
+params,file_size,peaq_score,distortion_index,processing_time,fitness
+"{'sample_rate': 44100, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}",-0.563930735915698,-0.08729578094856409,0.23717319823301217,-0.21460258958853995,0.2765516759586155
+"{'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}",-0.5619081063645901,-1.224305445530713,-2.1003736079083324,-0.3327285504959664,-1.5568270471961192
+"{'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': True, 'encoding_mode': 'Quality: 9 (VBR-aq)'}",-0.5506885895941918,-1.224305445530713,-2.1056312480481014,-0.5093400495095542,-1.5551835226725699
+"{'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': True, 'encoding_mode': 'Quality: 4 (VBR-aq)'}",-0.5233129686744198,-1.224305445530713,-2.1045797200201473,-0.4926539516741585,-1.5693901796158394
+"{'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 5, 'reservoir': True, 'encoding_mode': 'Bitrate: 313k (CBR)'}",-0.4936934444005682,-1.224305445530713,-2.103528191992194,-0.541598976770345,-1.58143723208957
+"{'sample_rate': 24000, 'sample_format': 'fltp', 'compression_level': 8, 'reservoir': False, 'encoding_mode': 'Quality: 9 (VBR-aq)'}",-0.47776173058660265,-0.4600858349099247,-0.16556203647330137,-0.4825843154074233,-0.24674436478824266

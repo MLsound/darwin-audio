@@ -141,10 +141,10 @@ def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_fil
         size_output_file = measured_size
 
     metrics = {
-        'time': process_time,
         'size': size_output_file,
         'peaq': objective_difference_grade,
         'im': distortion_index,
+        'time': process_time,
     }
     if logger: logger.info(f" >> Metrics: {metrics}")
 

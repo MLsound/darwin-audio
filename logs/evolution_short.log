@@ -1,0 +1,44 @@
+2025-06-13 08:30:48 - NSGA-II - INFO - GENETIC ALGORITHM STARTED
+2025-06-13 08:30:48 - NSGA-II - INFO -  Input: ./media/test.wav
+2025-06-13 08:30:48 - NSGA-II - INFO -  Strategy: Exploring different algorithms.
+2025-06-13 08:30:48 - NSGA-II - INFO -  Population Size: 5, Max Generations: 2
+2025-06-13 08:30:48 - NSGA-II - INFO -  Crossover Probability: 0.8, Mutation Probability: 0.1
+2025-06-13 08:30:48 - NSGA-II - INFO - 1º Individual: {'ar': '22050', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '1', 'b:a': '223k'}
+2025-06-13 08:30:49 - NSGA-II - INFO -  >> Metrics: {'time': 0.8685842780105304, 'size': 101921, 'peaq': -3.906, 'im': -4.026}
+2025-06-13 08:30:49 - NSGA-II - INFO - 2º Individual: {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '5', 'reservoir': '0', 'aq': '9'}
+2025-06-13 08:30:49 - NSGA-II - INFO -  >> Metrics: {'time': 0.3254564560193103, 'size': 50132, 'peaq': -3.799, 'im': -3.1}
+2025-06-13 08:30:49 - NSGA-II - INFO - 3º Individual: {'ar': '24000', 'sample_fmt': 's16p', 'compression_level': '8', 'reservoir': '0', 'b:a': '264k'}
+2025-06-13 08:30:49 - NSGA-II - INFO -  >> Metrics: {'time': 0.32576427099411376, 'size': 101804, 'peaq': -3.885, 'im': -3.769}
+2025-06-13 08:30:49 - NSGA-II - INFO - 4º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '5', 'reservoir': '1', 'aq': '9'}
+2025-06-13 08:30:50 - NSGA-II - INFO -  >> Metrics: {'time': 0.30223168997326866, 'size': 24956, 'peaq': -3.912, 'im': -4.107}
+2025-06-13 08:30:50 - NSGA-II - INFO - 5º Individual: {'ar': '44100', 'sample_fmt': 's32p', 'compression_level': '1', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:30:50 - NSGA-II - INFO -  >> Metrics: {'time': 0.4916373570158612, 'size': 20419, 'peaq': -3.424, 'im': -1.879}
+2025-06-13 08:30:50 - NSGA-II - INFO - 6º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '1', 'reservoir': '1', 'aq': '9'}
+2025-06-13 08:30:51 - NSGA-II - INFO -  >> Metrics: {'time': 0.29225571802817285, 'size': 24668, 'peaq': -3.912, 'im': -4.107}
+2025-06-13 08:30:51 - NSGA-II - INFO - 7º Individual: {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '8', 'reservoir': '0', 'aq': '9'}
+2025-06-13 08:30:51 - NSGA-II - INFO -  >> Metrics: {'time': 0.3228139029815793, 'size': 48068, 'peaq': -3.584, 'im': -2.262}
+2025-06-13 08:30:51 - NSGA-II - INFO - 8º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '5', 'reservoir': '1', 'aq': '9'}
+2025-06-13 08:30:51 - NSGA-II - INFO -  >> Metrics: {'time': 0.5310445929935668, 'size': 24956, 'peaq': -3.912, 'im': -4.107}
+2025-06-13 08:30:51 - NSGA-II - INFO - 9º Individual: {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '5', 'reservoir': '0', 'aq': '9'}
+2025-06-13 08:30:52 - NSGA-II - INFO -  >> Metrics: {'time': 0.45250797798507847, 'size': 50132, 'peaq': -3.799, 'im': -3.1}
+2025-06-13 08:30:52 - NSGA-II - INFO - 10º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '5', 'reservoir': '1', 'b:a': '319k'}
+2025-06-13 08:30:52 - NSGA-II - INFO -  >> Metrics: {'time': 0.3143203289946541, 'size': 42956, 'peaq': -3.912, 'im': -4.105}
+2025-06-13 08:30:52 - NSGA-II - INFO - 11º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '5', 'reservoir': '1', 'aq': '9'}
+2025-06-13 08:30:53 - NSGA-II - INFO -  >> Metrics: {'time': 0.29820808698423207, 'size': 24956, 'peaq': -3.912, 'im': -4.107}
+2025-06-13 08:30:53 - NSGA-II - INFO - 12º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '5', 'reservoir': '1', 'b:a': '313k'}
+2025-06-13 08:30:53 - NSGA-II - INFO -  >> Metrics: {'time': 0.27043345698621124, 'size': 42956, 'peaq': -3.912, 'im': -4.105}
+2025-06-13 08:30:53 - NSGA-II - INFO - 13º Individual: {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '8', 'reservoir': '0', 'aq': '9'}
+2025-06-13 08:30:53 - NSGA-II - INFO -  >> Metrics: {'time': 0.31035522298770957, 'size': 48068, 'peaq': -3.584, 'im': -2.262}
+2025-06-13 08:30:53 - NSGA-II - INFO - 14º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '1', 'reservoir': '1', 'aq': '4'}
+2025-06-13 08:30:53 - NSGA-II - INFO -  >> Metrics: {'time': 0.30354339600307867, 'size': 33452, 'peaq': -3.912, 'im': -4.106}
+2025-06-13 08:30:53 - NSGA-II - INFO - 15º Individual: {'ar': '8000', 'sample_fmt': 's32p', 'compression_level': '1', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:30:54 - NSGA-II - INFO -  >> Metrics: {'time': 0.41172845198889263, 'size': 21068, 'peaq': -3.912, 'im': -4.102}
+2025-06-13 08:30:54 - NSGA-II - INFO - HALL OF FAME (Pareto Front)
+2025-06-13 08:30:54 - NSGA-II - INFO - Individual 0: {'params': {'sample_rate': 44100, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}, 'file_size': -0.563930735915698, 'peaq_score': -0.08729578094856409, 'distortion_index': 0.23717319823301217, 'processing_time': -0.21460258958853995, 'fitness': 0.2765516759586155}
+2025-06-13 08:30:54 - NSGA-II - INFO - Individual 1: {'params': {'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}, 'file_size': -0.5619081063645901, 'peaq_score': -1.224305445530713, 'distortion_index': -2.1003736079083324, 'processing_time': -0.3327285504959664, 'fitness': -1.5568270471961192}
+2025-06-13 08:30:54 - NSGA-II - INFO - Individual 2: {'params': {'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': True, 'encoding_mode': 'Quality: 9 (VBR-aq)'}, 'file_size': -0.5506885895941918, 'peaq_score': -1.224305445530713, 'distortion_index': -2.1056312480481014, 'processing_time': -0.5093400495095542, 'fitness': -1.5551835226725699}
+2025-06-13 08:30:54 - NSGA-II - INFO - Individual 3: {'params': {'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 1, 'reservoir': True, 'encoding_mode': 'Quality: 4 (VBR-aq)'}, 'file_size': -0.5233129686744198, 'peaq_score': -1.224305445530713, 'distortion_index': -2.1045797200201473, 'processing_time': -0.4926539516741585, 'fitness': -1.5693901796158394}
+2025-06-13 08:30:54 - NSGA-II - INFO - Individual 4: {'params': {'sample_rate': 8000, 'sample_format': 's32p', 'compression_level': 5, 'reservoir': True, 'encoding_mode': 'Bitrate: 313k (CBR)'}, 'file_size': -0.4936934444005682, 'peaq_score': -1.224305445530713, 'distortion_index': -2.103528191992194, 'processing_time': -0.541598976770345, 'fitness': -1.58143723208957}
+2025-06-13 08:30:54 - NSGA-II - INFO - Individual 5: {'params': {'sample_rate': 24000, 'sample_format': 'fltp', 'compression_level': 8, 'reservoir': False, 'encoding_mode': 'Quality: 9 (VBR-aq)'}, 'file_size': -0.47776173058660265, 'peaq_score': -0.4600858349099247, 'distortion_index': -0.16556203647330137, 'processing_time': -0.4825843154074233, 'fitness': -0.24674436478824266}
+2025-06-13 08:30:54 - NSGA-II - INFO - EXECUTION FINISHED SUCCESSFULLY
+2025-06-13 08:30:54 - NSGA-II - INFO -  > Total Execution Time: 6 seconds

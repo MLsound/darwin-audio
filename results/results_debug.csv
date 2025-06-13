@@ -1,0 +1,7 @@
+params,file_size,peaq_score,distortion_index,processing_time,fitness
+"{'sample_rate': 48000, 'sample_format': 'fltp', 'compression_level': 0, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}",-0.5640024161617311,-0.7583178780790132,-0.6124614483536751,0.01868153451899726,-0.6609891812302001
+"{'sample_rate': 48000, 'sample_format': 'fltp', 'compression_level': 2, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}",-0.5640024161617311,-0.8561752672438698,-0.803839549441271,-0.25312398151264937,-0.8026697249197531
+"{'sample_rate': 16000, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 103k (CBR)'}",-0.4362495185361288,1.4551230673165638,1.271876777739572,-0.3028100260942993,2.069951361211215
+"{'sample_rate': 22050, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 107k (CBR)'}",-0.4051808066794341,-1.2126557563444207,-2.026766645951565,-0.32162756180069396,-1.6020139687001387
+"{'sample_rate': 22050, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 242k (CBR)'}",-0.3099271092987524,-1.2103258185071624,-2.01730289369998,-0.3393725579044908,-1.6435845040725556
+"{'sample_rate': 16000, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 242k (CBR)'}",-0.3087958080244039,1.3432860511281557,1.2119396801462043,-0.3899228822900157,1.8807620032987196

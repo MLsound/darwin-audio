@@ -1,0 +1,636 @@
+2025-06-13 08:52:09 - NSGA-II - INFO - GENETIC ALGORITHM STARTED
+2025-06-13 08:52:09 - NSGA-II - INFO -  Input: ./media/test.wav
+2025-06-13 08:52:09 - NSGA-II - DEBUG -  Algorithm: NSGA-II
+2025-06-13 08:52:09 - NSGA-II - DEBUG -  Multi-objective weights: [-0.5, 1.0, 0.3, -0.05]
+2025-06-13 08:52:09 - NSGA-II - INFO -  Strategy: Exploring different algorithms.
+2025-06-13 08:52:09 - NSGA-II - INFO -  Population Size: 5, Max Generations: 10
+2025-06-13 08:52:09 - NSGA-II - INFO -  Crossover Probability: 0.8, Mutation Probability: 0.1
+2025-06-13 08:52:09 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0'}
+2025-06-13 08:52:09 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:09 - NSGA-II - INFO - 1º Individual: {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:09 - NSGA-II - DEBUG - Genetic parameters: [8, 2, 2, 0, 0, 12.397921020762617]
+2025-06-13 08:52:09 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test1.mp3
+2025-06-13 08:52:09 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:09 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:10 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test1.mp3'
+2025-06-13 08:52:10 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:10 - NSGA-II - INFO -  >> Metrics: {'time': 0.6879520709917415, 'size': 20396, 'peaq': -3.754, 'im': -2.869}
+2025-06-13 08:52:10 - NSGA-II - DEBUG - Z-SCORES: (-0.5640024161617311, -0.8561752672438698, -0.803839549441271, 0.07560116455927446)
+2025-06-13 08:52:10 - NSGA-II - DEBUG - FITNESS: -0.8191059822233492
+2025-06-13 08:52:10 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:10 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:10 - NSGA-II - INFO - 2º Individual: {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:10 - NSGA-II - DEBUG - Genetic parameters: [0, 0, 0, 0, 2, 106.98912082130948]
+2025-06-13 08:52:10 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test2.mp3
+2025-06-13 08:52:10 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:10 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:11 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test2.mp3'
+2025-06-13 08:52:11 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:11 - NSGA-II - INFO -  >> Metrics: {'time': 0.5296426579880062, 'size': 34964, 'peaq': -3.912, 'im': -4.104}
+2025-06-13 08:52:11 - NSGA-II - DEBUG - Z-SCORES: (-0.5186007716308525, -1.224305445530713, -2.10247666396424, -0.15842095757399233)
+2025-06-13 08:52:11 - NSGA-II - DEBUG - FITNESS: -1.587827011025859
+2025-06-13 08:52:11 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1'}
+2025-06-13 08:52:11 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1', 'b:a': '119k', 'abr': 'True'}
+2025-06-13 08:52:11 - NSGA-II - INFO - 3º Individual: {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1', 'b:a': '119k', 'abr': 'True'}
+2025-06-13 08:52:11 - NSGA-II - DEBUG - Genetic parameters: [5, 2, 3, 1, 2, 119.34915992069523]
+2025-06-13 08:52:11 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test3.mp3
+2025-06-13 08:52:11 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:11 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:11 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test3.mp3'
+2025-06-13 08:52:11 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:11 - NSGA-II - INFO -  >> Metrics: {'time': 0.49068554502446204, 'size': 75356, 'peaq': -3.887, 'im': -3.784}
+2025-06-13 08:52:11 - NSGA-II - DEBUG - Z-SCORES: (-0.3927177934669833, -1.1660569995992507, -1.765987695019017, -0.21600961307421143)
+2025-06-13 08:52:11 - NSGA-II - DEBUG - FITNESS: -1.4886939307177534
+2025-06-13 08:52:11 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:11 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:11 - NSGA-II - INFO - 4º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:11 - NSGA-II - DEBUG - Genetic parameters: [3, 0, 7, 0, 0, 241.66785580536353]
+2025-06-13 08:52:11 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test4.mp3
+2025-06-13 08:52:11 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:11 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:11 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test4.mp3'
+2025-06-13 08:52:11 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:12 - NSGA-II - INFO -  >> Metrics: {'time': 0.43328966497210786, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:12 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.30085551956014756)
+2025-06-13 08:52:12 - NSGA-II - DEBUG - FITNESS: 1.8763086351622262
+2025-06-13 08:52:12 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 's32p', 'compression_level': '3', 'reservoir': '1'}
+2025-06-13 08:52:12 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 's32p', 'compression_level': '3', 'reservoir': '1', 'b:a': '73k', 'abr': 'True'}
+2025-06-13 08:52:12 - NSGA-II - INFO - 5º Individual: {'ar': '22050', 'sample_fmt': 's32p', 'compression_level': '3', 'reservoir': '1', 'b:a': '73k', 'abr': 'True'}
+2025-06-13 08:52:12 - NSGA-II - DEBUG - Genetic parameters: [4, 1, 3, 1, 2, 73.21255281519107]
+2025-06-13 08:52:12 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test5.mp3
+2025-06-13 08:52:12 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:12 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:12 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test5.mp3'
+2025-06-13 08:52:12 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:12 - NSGA-II - INFO -  >> Metrics: {'time': 0.5966542940004729, 'size': 50313, 'peaq': -3.907, 'im': -4.041}
+2025-06-13 08:52:12 - NSGA-II - DEBUG - Z-SCORES: (-0.47076511526728476, -1.2126557563444207, -2.0362303982031493, -0.059360484986114896)
+2025-06-13 08:52:12 - NSGA-II - DEBUG - FITNESS: -1.5851742939224174
+2025-06-13 08:52:12 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1'}
+2025-06-13 08:52:12 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1', 'b:a': '119k', 'abr': 'True'}
+2025-06-13 08:52:12 - NSGA-II - INFO - 6º Individual: {'ar': '22050', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1', 'b:a': '119k', 'abr': 'True'}
+2025-06-13 08:52:12 - NSGA-II - DEBUG - Genetic parameters: [3.9676470999890707, 2, 3, 1, 2, 119.34915992069523]
+2025-06-13 08:52:12 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test6.mp3
+2025-06-13 08:52:12 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:12 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:13 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test6.mp3'
+2025-06-13 08:52:13 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:14 - NSGA-II - INFO -  >> Metrics: {'time': 1.2429871090280358, 'size': 75778, 'peaq': -3.907, 'im': -4.031}
+2025-06-13 08:52:14 - NSGA-II - DEBUG - Z-SCORES: (-0.39140261677889776, -1.2126557563444207, -2.0257151179236104, 0.896086030209729)
+2025-06-13 08:52:14 - NSGA-II - DEBUG - FITNESS: -1.6694732848425415
+2025-06-13 08:52:14 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:14 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:14 - NSGA-II - INFO - 7º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:14 - NSGA-II - DEBUG - Genetic parameters: [2.996967145965054, 0, 0.09470961996107041, 0, 2, 106.98912082130948]
+2025-06-13 08:52:14 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test7.mp3
+2025-06-13 08:52:14 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:14 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:14 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test7.mp3'
+2025-06-13 08:52:14 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:15 - NSGA-II - INFO -  >> Metrics: {'time': 1.0765636440191884, 'size': 62144, 'peaq': -3.282, 'im': -1.612}
+2025-06-13 08:52:15 - NSGA-II - DEBUG - Z-SCORES: (-0.43389342001434517, 0.24355539194214293, 0.5179311816966823, 0.6500692475360228)
+2025-06-13 08:52:15 - NSGA-II - DEBUG - FITNESS: 0.583377994081519
+2025-06-13 08:52:15 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0'}
+2025-06-13 08:52:15 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:15 - NSGA-II - INFO - 8º Individual: {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:15 - NSGA-II - DEBUG - Genetic parameters: [8, 2, 2, 0, 0.00403604171433769, 12.397921020762617]
+2025-06-13 08:52:15 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test8.mp3
+2025-06-13 08:52:15 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:15 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:15 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test8.mp3'
+2025-06-13 08:52:15 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:15 - NSGA-II - INFO -  >> Metrics: {'time': 0.5421136280056089, 'size': 20396, 'peaq': -3.754, 'im': -2.869}
+2025-06-13 08:52:15 - NSGA-II - DEBUG - Z-SCORES: (-0.5640024161617311, -0.8561752672438698, -0.803839549441271, -0.13998564906513658)
+2025-06-13 08:52:15 - NSGA-II - DEBUG - FITNESS: -0.8083266415421286
+2025-06-13 08:52:15 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:15 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:15 - NSGA-II - INFO - 9º Individual: {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:15 - NSGA-II - DEBUG - Genetic parameters: [0, 0.002264076734674658, 0, 0, 1.971507185693808, 106.98912082130948]
+2025-06-13 08:52:15 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test9.mp3
+2025-06-13 08:52:15 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:15 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:15 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test9.mp3'
+2025-06-13 08:52:15 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:16 - NSGA-II - INFO -  >> Metrics: {'time': 0.5253949940088205, 'size': 34964, 'peaq': -3.912, 'im': -4.104}
+2025-06-13 08:52:16 - NSGA-II - DEBUG - Z-SCORES: (-0.5186007716308525, -1.224305445530713, -2.10247666396424, -0.16470009991718723)
+2025-06-13 08:52:16 - NSGA-II - DEBUG - FITNESS: -1.5875130539086992
+2025-06-13 08:52:16 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:16 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '108k', 'abr': 'True'}
+2025-06-13 08:52:16 - NSGA-II - INFO - 10º Individual: {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '108k', 'abr': 'True'}
+2025-06-13 08:52:16 - NSGA-II - DEBUG - Genetic parameters: [7.802975082746523, 0.009912283551501644, 0, 0, 2, 107.78628161247062]
+2025-06-13 08:52:16 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test10.mp3
+2025-06-13 08:52:16 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:16 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:16 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test10.mp3'
+2025-06-13 08:52:16 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:17 - NSGA-II - INFO -  >> Metrics: {'time': 0.9323816820106003, 'size': 75716, 'peaq': -3.815, 'im': -3.196}
+2025-06-13 08:52:17 - NSGA-II - DEBUG - Z-SCORES: (-0.3915958417899435, -0.9983014753166384, -1.1476892145821704, 0.43693113981155224)
+2025-06-13 08:52:17 - NSGA-II - DEBUG - FITNESS: -1.1686568757868954
+2025-06-13 08:52:17 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1'}
+2025-06-13 08:52:17 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1', 'b:a': '32k'}
+2025-06-13 08:52:17 - NSGA-II - INFO - 11º Individual: {'ar': '24000', 'sample_fmt': 'fltp', 'compression_level': '3', 'reservoir': '1', 'b:a': '32k'}
+2025-06-13 08:52:17 - NSGA-II - DEBUG - Genetic parameters: [5, 2, 3, 0.9795086924123837, 0.0036524007441925965, 0.8632518822720527]
+2025-06-13 08:52:17 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test11.mp3
+2025-06-13 08:52:17 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:17 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:17 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test11.mp3'
+2025-06-13 08:52:17 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:17 - NSGA-II - INFO -  >> Metrics: {'time': 0.5787674190360121, 'size': 20492, 'peaq': -3.885, 'im': -3.771}
+2025-06-13 08:52:17 - NSGA-II - DEBUG - Z-SCORES: (-0.5637032290478537, -1.1613971239247332, -1.7523178306556173, -0.0858018971428054)
+2025-06-13 08:52:17 - NSGA-II - DEBUG - FITNESS: -1.400950763740351
+2025-06-13 08:52:17 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '2', 'reservoir': '0'}
+2025-06-13 08:52:17 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '2', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:17 - NSGA-II - INFO - 12º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '2', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:17 - NSGA-II - DEBUG - Genetic parameters: [3, 0.03642834253435567, 2.070776727932693, 0, 0, 241.66785580536353]
+2025-06-13 08:52:17 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test12.mp3
+2025-06-13 08:52:17 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:17 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:18 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test12.mp3'
+2025-06-13 08:52:18 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:18 - NSGA-II - INFO -  >> Metrics: {'time': 0.5700224229949526, 'size': 102284, 'peaq': -2.842, 'im': -0.989}
+2025-06-13 08:52:18 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.2687280403358836, 1.173033143111913, -0.0987292556159713)
+2025-06-13 08:52:18 - NSGA-II - DEBUG - FITNESS: 1.779972350062458
+2025-06-13 08:52:18 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '1'}
+2025-06-13 08:52:18 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '1', 'b:a': '119k', 'abr': 'True'}
+2025-06-13 08:52:18 - NSGA-II - INFO - 13º Individual: {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '1', 'b:a': '119k', 'abr': 'True'}
+2025-06-13 08:52:18 - NSGA-II - DEBUG - Genetic parameters: [7.977963243501618, 2, 2.042951246683879, 0.9013169009664619, 2, 119.34915992069523]
+2025-06-13 08:52:18 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test13.mp3
+2025-06-13 08:52:18 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:18 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:18 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test13.mp3'
+2025-06-13 08:52:18 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:18 - NSGA-II - INFO -  >> Metrics: {'time': 0.588922338996781, 'size': 75548, 'peaq': -3.789, 'im': -3.041}
+2025-06-13 08:52:18 - NSGA-II - DEBUG - Z-SCORES: (-0.3921194192392288, -0.9377230915479178, -0.9847023702493279, -0.07079030765976856)
+2025-06-13 08:52:18 - NSGA-II - DEBUG - FITNESS: -1.0335345776201132
+2025-06-13 08:52:18 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:18 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:18 - NSGA-II - INFO - 14º Individual: {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:18 - NSGA-II - DEBUG - Genetic parameters: [0, 0.002264076734674658, 0, 0, 1.971507185693808, 106.98912082130948]
+2025-06-13 08:52:18 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test14.mp3
+2025-06-13 08:52:18 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:18 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:19 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test14.mp3'
+2025-06-13 08:52:19 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:19 - NSGA-II - INFO -  >> Metrics: {'time': 0.7093015840218868, 'size': 34964, 'peaq': -3.912, 'im': -4.104}
+2025-06-13 08:52:19 - NSGA-II - DEBUG - Z-SCORES: (-0.5186007716308525, -1.224305445530713, -2.10247666396424, 0.10716124839148823)
+2025-06-13 08:52:19 - NSGA-II - DEBUG - FITNESS: -1.6011061213241329
+2025-06-13 08:52:19 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:19 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:19 - NSGA-II - INFO - 15º Individual: {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:19 - NSGA-II - DEBUG - Genetic parameters: [2.996967145965054, 1.9985924541363342, 0.08167390477587477, 0, 1.9638283561002843, 106.98912082130948]
+2025-06-13 08:52:19 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test15.mp3
+2025-06-13 08:52:19 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:19 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:20 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test15.mp3'
+2025-06-13 08:52:20 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:20 - NSGA-II - INFO -  >> Metrics: {'time': 1.071976330014877, 'size': 62216, 'peaq': -3.248, 'im': -1.555}
+2025-06-13 08:52:20 - NSGA-II - DEBUG - Z-SCORES: (-0.4336690296789372, 0.32277327840893155, 0.5778682792900502, 0.6432880148991784)
+2025-06-13 08:52:20 - NSGA-II - DEBUG - FITNESS: 0.6808038762904562
+2025-06-13 08:52:20 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:20 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:20 - NSGA-II - INFO - 16º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:20 - NSGA-II - DEBUG - Genetic parameters: [2.996967145965054, 0, 0.09470961996107041, 0, 2, 106.98912082130948]
+2025-06-13 08:52:20 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test16.mp3
+2025-06-13 08:52:20 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:20 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:21 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test16.mp3'
+2025-06-13 08:52:21 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:21 - NSGA-II - INFO -  >> Metrics: {'time': 0.8728252629807685, 'size': 62144, 'peaq': -3.282, 'im': -1.612}
+2025-06-13 08:52:21 - NSGA-II - DEBUG - Z-SCORES: (-0.43389342001434517, 0.24355539194214293, 0.5179311816966823, 0.34889139976343214)
+2025-06-13 08:52:21 - NSGA-II - DEBUG - FITNESS: 0.5984368864701486
+2025-06-13 08:52:21 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:21 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:21 - NSGA-II - INFO - 17º Individual: {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:21 - NSGA-II - DEBUG - Genetic parameters: [2.996967145965054, 1.9808514006225324, 0.08171393961145566, 0, 1.9638283561002843, 106.98912082130948]
+2025-06-13 08:52:21 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test17.mp3
+2025-06-13 08:52:21 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:21 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:22 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test17.mp3'
+2025-06-13 08:52:22 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:22 - NSGA-II - INFO -  >> Metrics: {'time': 0.7045507979928516, 'size': 62216, 'peaq': -3.248, 'im': -1.555}
+2025-06-13 08:52:22 - NSGA-II - DEBUG - Z-SCORES: (-0.4336690296789372, 0.32277327840893155, 0.5778682792900502, 0.10013836196154698)
+2025-06-13 08:52:22 - NSGA-II - DEBUG - FITNESS: 0.7079613589373379
+2025-06-13 08:52:22 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:22 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:22 - NSGA-II - INFO - 18º Individual: {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:22 - NSGA-II - DEBUG - Genetic parameters: [0, 0.00013156388443239702, 0, 0, 1.971507185693808, 106.98912082130948]
+2025-06-13 08:52:22 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test18.mp3
+2025-06-13 08:52:22 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:22 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:22 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test18.mp3'
+2025-06-13 08:52:22 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:22 - NSGA-II - INFO -  >> Metrics: {'time': 0.510147856984986, 'size': 34964, 'peaq': -3.912, 'im': -4.104}
+2025-06-13 08:52:22 - NSGA-II - DEBUG - Z-SCORES: (-0.5186007716308525, -1.224305445530713, -2.10247666396424, -0.18723929891409252)
+2025-06-13 08:52:22 - NSGA-II - DEBUG - FITNESS: -1.5863860939588539
+2025-06-13 08:52:22 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0'}
+2025-06-13 08:52:22 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '107k'}
+2025-06-13 08:52:22 - NSGA-II - INFO - 19º Individual: {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '107k'}
+2025-06-13 08:52:22 - NSGA-II - DEBUG - Genetic parameters: [2.996967145965054, 1.9349037368861863, 1.9600829144092708, 0, 0.08047334564318998, 106.98912082130948]
+2025-06-13 08:52:22 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test19.mp3
+2025-06-13 08:52:22 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:22 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:23 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test19.mp3'
+2025-06-13 08:52:23 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:23 - NSGA-II - INFO -  >> Metrics: {'time': 0.48894003001623787, 'size': 71612, 'peaq': -2.956, 'im': -1.132}
+2025-06-13 08:52:23 - NSGA-II - DEBUG - Z-SCORES: (-0.4043860909081976, 1.0031151268884146, 1.0226646351145166, -0.21858993422308998)
+2025-06-13 08:52:23 - NSGA-II - DEBUG - FITNESS: 1.5230370595880227
+2025-06-13 08:52:23 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:23 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:23 - NSGA-II - INFO - 20º Individual: {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:23 - NSGA-II - DEBUG - Genetic parameters: [0, 0.002264076734674658, 0.08195164680549716, 0, 1.971507185693808, 106.98912082130948]
+2025-06-13 08:52:23 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test20.mp3
+2025-06-13 08:52:23 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:23 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:23 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test20.mp3'
+2025-06-13 08:52:23 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:23 - NSGA-II - INFO -  >> Metrics: {'time': 0.5343521589820739, 'size': 34964, 'peaq': -3.912, 'im': -4.104}
+2025-06-13 08:52:23 - NSGA-II - DEBUG - Z-SCORES: (-0.5186007716308525, -1.224305445530713, -2.10247666396424, -0.15145910106837548)
+2025-06-13 08:52:23 - NSGA-II - DEBUG - FITNESS: -1.5881751038511398
+2025-06-13 08:52:23 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:23 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:23 - NSGA-II - INFO - 21º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:23 - NSGA-II - DEBUG - Genetic parameters: [2.996967145965054, 0, 0.09470961996107041, 0, 0.06770512797254769, 11.890881535547734]
+2025-06-13 08:52:23 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test21.mp3
+2025-06-13 08:52:23 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:23 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:24 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test21.mp3'
+2025-06-13 08:52:24 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:24 - NSGA-II - INFO -  >> Metrics: {'time': 0.5644815969862975, 'size': 20528, 'peaq': -3.879, 'im': -3.702}
+2025-06-13 08:52:24 - NSGA-II - DEBUG - Z-SCORES: (-0.5635910338801497, -1.1474174969011826, -1.6797623967268036, -0.10692002479585626)
+2025-06-13 08:52:24 - NSGA-II - DEBUG - FITNESS: -1.3642046977393558
+2025-06-13 08:52:24 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:24 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:24 - NSGA-II - INFO - 22º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:24 - NSGA-II - DEBUG - Genetic parameters: [2.996967145965054, 0, 0.09474760089341676, 0, 1.963666853272451, 106.98912082130948]
+2025-06-13 08:52:24 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test22.mp3
+2025-06-13 08:52:24 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:24 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:24 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test22.mp3'
+2025-06-13 08:52:24 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:25 - NSGA-II - INFO -  >> Metrics: {'time': 0.6519397039955948, 'size': 62144, 'peaq': -3.282, 'im': -1.612}
+2025-06-13 08:52:25 - NSGA-II - DEBUG - Z-SCORES: (-0.43389342001434517, 0.24355539194214293, 0.5179311816966823, 0.02236560270875183)
+2025-06-13 08:52:25 - NSGA-II - DEBUG - FITNESS: 0.6147631763228826
+2025-06-13 08:52:25 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:25 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:25 - NSGA-II - INFO - 23º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:25 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:25 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test23.mp3
+2025-06-13 08:52:25 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:25 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:25 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test23.mp3'
+2025-06-13 08:52:25 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:25 - NSGA-II - INFO -  >> Metrics: {'time': 0.3730380879715085, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:25 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.3899228822900157)
+2025-06-13 08:52:25 - NSGA-II - DEBUG - FITNESS: 1.8807620032987196
+2025-06-13 08:52:25 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:25 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:25 - NSGA-II - INFO - 24º Individual: {'ar': '8000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:25 - NSGA-II - DEBUG - Genetic parameters: [0.020811273598184243, 1.6095959385524706e-06, 0.003056279783065892, 0, 1.971507185693808, 106.98912082130948]
+2025-06-13 08:52:25 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test24.mp3
+2025-06-13 08:52:25 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:25 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:25 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test24.mp3'
+2025-06-13 08:52:25 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:26 - NSGA-II - INFO -  >> Metrics: {'time': 0.5172682480188087, 'size': 34964, 'peaq': -3.912, 'im': -4.104}
+2025-06-13 08:52:26 - NSGA-II - DEBUG - Z-SCORES: (-0.5186007716308525, -1.224305445530713, -2.10247666396424, -0.17671352543962104)
+2025-06-13 08:52:26 - NSGA-II - DEBUG - FITNESS: -1.5869123826325775
+2025-06-13 08:52:26 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0'}
+2025-06-13 08:52:26 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:26 - NSGA-II - INFO - 25º Individual: {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:26 - NSGA-II - DEBUG - Genetic parameters: [7.907819485617678, 2, 2, 0, 0.00403604171433769, 12.397921020762617]
+2025-06-13 08:52:26 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test25.mp3
+2025-06-13 08:52:26 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:26 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:26 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test25.mp3'
+2025-06-13 08:52:26 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:26 - NSGA-II - INFO -  >> Metrics: {'time': 0.4655787139781751, 'size': 20396, 'peaq': -3.754, 'im': -2.869}
+2025-06-13 08:52:26 - NSGA-II - DEBUG - Z-SCORES: (-0.5640024161617311, -0.8561752672438698, -0.803839549441271, -0.25312398151264937)
+2025-06-13 08:52:26 - NSGA-II - DEBUG - FITNESS: -0.8026697249197531
+2025-06-13 08:52:26 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:26 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '112k', 'abr': 'True'}
+2025-06-13 08:52:26 - NSGA-II - INFO - 26º Individual: {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '0', 'reservoir': '0', 'b:a': '112k', 'abr': 'True'}
+2025-06-13 08:52:26 - NSGA-II - DEBUG - Genetic parameters: [8, 0.0032318284955795695, 0.02934722932610412, 0, 1.9696949109403437, 112.13639110913905]
+2025-06-13 08:52:26 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test26.mp3
+2025-06-13 08:52:26 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:26 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:27 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test26.mp3'
+2025-06-13 08:52:27 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:27 - NSGA-II - INFO -  >> Metrics: {'time': 0.8045902160229161, 'size': 79700, 'peaq': -3.803, 'im': -3.124}
+2025-06-13 08:52:27 - NSGA-II - DEBUG - Z-SCORES: (-0.37917957656403606, -0.9703422212695363, -1.0719791965694954, 0.2480224104218891)
+2025-06-13 08:52:27 - NSGA-II - DEBUG - FITNESS: -1.1147473124794613
+2025-06-13 08:52:27 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:27 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:27 - NSGA-II - INFO - 27º Individual: {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:27 - NSGA-II - DEBUG - Genetic parameters: [8, 2, 0.0019461351111703662, 0, 0.00403604171433769, 12.397921020762617]
+2025-06-13 08:52:27 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test27.mp3
+2025-06-13 08:52:27 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:27 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:27 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test27.mp3'
+2025-06-13 08:52:27 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:27 - NSGA-II - INFO -  >> Metrics: {'time': 0.6494475350191351, 'size': 20396, 'peaq': -3.712, 'im': -2.687}
+2025-06-13 08:52:27 - NSGA-II - DEBUG - Z-SCORES: (-0.5640024161617311, -0.7583178780790132, -0.6124614483536751, 0.01868153451899726)
+2025-06-13 08:52:27 - NSGA-II - DEBUG - FITNESS: -0.6609891812302001
+2025-06-13 08:52:27 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:27 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:27 - NSGA-II - INFO - 28º Individual: {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:27 - NSGA-II - DEBUG - Genetic parameters: [3.6256547764571, 0, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:27 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test28.mp3
+2025-06-13 08:52:27 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:27 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:28 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test28.mp3'
+2025-06-13 08:52:28 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:28 - NSGA-II - INFO -  >> Metrics: {'time': 0.4072339670092333, 'size': 101921, 'peaq': -3.906, 'im': -4.023}
+2025-06-13 08:52:28 - NSGA-II - DEBUG - Z-SCORES: (-0.3099271092987524, -1.2103258185071624, -2.01730289369998, -0.3393725579044908)
+2025-06-13 08:52:28 - NSGA-II - DEBUG - FITNESS: -1.6435845040725556
+2025-06-13 08:52:28 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:28 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:28 - NSGA-II - INFO - 29º Individual: {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:28 - NSGA-II - DEBUG - Genetic parameters: [3.615905196856668, 0.02529426235249299, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:28 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test29.mp3
+2025-06-13 08:52:28 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:28 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:28 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test29.mp3'
+2025-06-13 08:52:28 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:28 - NSGA-II - INFO -  >> Metrics: {'time': 0.4288225239724852, 'size': 101921, 'peaq': -3.906, 'im': -4.023}
+2025-06-13 08:52:28 - NSGA-II - DEBUG - Z-SCORES: (-0.3099271092987524, -1.2103258185071624, -2.01730289369998, -0.30745910551732336)
+2025-06-13 08:52:28 - NSGA-II - DEBUG - FITNESS: -1.645180176691914
+2025-06-13 08:52:28 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:28 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:28 - NSGA-II - INFO - 30º Individual: {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '107k', 'abr': 'True'}
+2025-06-13 08:52:28 - NSGA-II - DEBUG - Genetic parameters: [2.9872769118810614, 1.9808514006225324, 0.1682725558938194, 0, 1.9638283561002843, 106.98912082130948]
+2025-06-13 08:52:28 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test30.mp3
+2025-06-13 08:52:28 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:28 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:29 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test30.mp3'
+2025-06-13 08:52:29 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:29 - NSGA-II - INFO -  >> Metrics: {'time': 0.7110860469983891, 'size': 62216, 'peaq': -3.248, 'im': -1.555}
+2025-06-13 08:52:29 - NSGA-II - DEBUG - Z-SCORES: (-0.4336690296789372, 0.32277327840893155, 0.5778682792900502, 0.10979914467766454)
+2025-06-13 08:52:29 - NSGA-II - DEBUG - FITNESS: 0.707478319801532
+2025-06-13 08:52:29 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:29 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '233k'}
+2025-06-13 08:52:29 - NSGA-II - INFO - 31º Individual: {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '233k'}
+2025-06-13 08:52:29 - NSGA-II - DEBUG - Genetic parameters: [2.9970206000169965, 1.986143965892495, 0.08171393961145566, 0, 0.05404630937508803, 232.68676266935]
+2025-06-13 08:52:29 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test31.mp3
+2025-06-13 08:52:29 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:29 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:30 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test31.mp3'
+2025-06-13 08:52:30 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:30 - NSGA-II - INFO -  >> Metrics: {'time': 0.753700620989548, 'size': 102284, 'peaq': -3.001, 'im': -1.191}
+2025-06-13 08:52:30 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 0.8982679242117823, 0.960624481465241, 0.17279447041348062)
+2025-06-13 08:52:30 - NSGA-II - DEBUG - FITNESS: 1.3322134491428823
+2025-06-13 08:52:30 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:30 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:30 - NSGA-II - INFO - 32º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:30 - NSGA-II - DEBUG - Genetic parameters: [3.0072779912721646, 0, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:30 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test32.mp3
+2025-06-13 08:52:30 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:30 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:30 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test32.mp3'
+2025-06-13 08:52:30 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:30 - NSGA-II - INFO -  >> Metrics: {'time': 0.5452251940150745, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:30 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.13538595238964135)
+2025-06-13 08:52:30 - NSGA-II - DEBUG - FITNESS: 1.8680351568037008
+2025-06-13 08:52:30 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:30 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:30 - NSGA-II - INFO - 33º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:30 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:30 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test33.mp3
+2025-06-13 08:52:30 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:30 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:31 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test33.mp3'
+2025-06-13 08:52:31 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:31 - NSGA-II - INFO -  >> Metrics: {'time': 0.4224705800006632, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:31 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.31684891614041205)
+2025-06-13 08:52:31 - NSGA-II - DEBUG - FITNESS: 1.8771083049912394
+2025-06-13 08:52:31 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:31 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:31 - NSGA-II - INFO - 34º Individual: {'ar': '48000', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:31 - NSGA-II - DEBUG - Genetic parameters: [7.77595810064456, 1.9752000469351285, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:31 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test34.mp3
+2025-06-13 08:52:31 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:31 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:31 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test34.mp3'
+2025-06-13 08:52:31 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:31 - NSGA-II - INFO -  >> Metrics: {'time': 0.4579392129962798, 'size': 162092, 'peaq': -3.736, 'im': -2.784}
+2025-06-13 08:52:31 - NSGA-II - DEBUG - Z-SCORES: (-0.1224022360788531, -0.8142363861732174, -0.7144596670651958, -0.26441713330887334)
+2025-06-13 08:52:31 - NSGA-II - DEBUG - FITNESS: -0.9541523115879059
+2025-06-13 08:52:31 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:31 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '107k'}
+2025-06-13 08:52:31 - NSGA-II - INFO - 35º Individual: {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '107k'}
+2025-06-13 08:52:31 - NSGA-II - DEBUG - Genetic parameters: [3.6597252374163847, 0, 7, 0, 0.0548575477412826, 106.66979365220705]
+2025-06-13 08:52:31 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test35.mp3
+2025-06-13 08:52:31 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:31 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:32 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test35.mp3'
+2025-06-13 08:52:32 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:32 - NSGA-II - INFO -  >> Metrics: {'time': 0.41923796001356095, 'size': 71357, 'peaq': -3.907, 'im': -4.032}
+2025-06-13 08:52:32 - NSGA-II - DEBUG - Z-SCORES: (-0.4051808066794341, -1.2126557563444207, -2.026766645951565, -0.32162756180069396)
+2025-06-13 08:52:32 - NSGA-II - DEBUG - FITNESS: -1.6020139687001387
+2025-06-13 08:52:32 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:32 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:32 - NSGA-II - INFO - 36º Individual: {'ar': '22050', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:32 - NSGA-II - DEBUG - Genetic parameters: [3.6360854650891437, 1.9936000384191634, 7, 0, 0.0548575477412826, 0.291851933248779]
+2025-06-13 08:52:32 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test36.mp3
+2025-06-13 08:52:32 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:32 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:32 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test36.mp3'
+2025-06-13 08:52:32 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:32 - NSGA-II - INFO -  >> Metrics: {'time': 0.58422549199895, 'size': 20497, 'peaq': -3.901, 'im': -3.96}
+2025-06-13 08:52:32 - NSGA-II - DEBUG - Z-SCORES: (-0.5636876463856727, -1.1986761293208692, -1.9510566279388897, -0.07773345829694352)
+2025-06-13 08:52:32 - NSGA-II - DEBUG - FITNESS: -1.4982626215948525
+2025-06-13 08:52:32 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:32 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:32 - NSGA-II - INFO - 37º Individual: {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:32 - NSGA-II - DEBUG - Genetic parameters: [3.6256547764571, 0, 7, 0.0006608175870175259, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:32 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test37.mp3
+2025-06-13 08:52:32 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:32 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:33 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test37.mp3'
+2025-06-13 08:52:33 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:33 - NSGA-II - INFO -  >> Metrics: {'time': 0.7686695019947365, 'size': 101921, 'peaq': -3.906, 'im': -4.023}
+2025-06-13 08:52:33 - NSGA-II - DEBUG - Z-SCORES: (-0.3099271092987524, -1.2103258185071624, -2.01730289369998, 0.19492233528473685)
+2025-06-13 08:52:33 - NSGA-II - DEBUG - FITNESS: -1.670299248732017
+2025-06-13 08:52:33 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:33 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '244k'}
+2025-06-13 08:52:33 - NSGA-II - INFO - 38º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '244k'}
+2025-06-13 08:52:33 - NSGA-II - DEBUG - Genetic parameters: [2.9165977405532946, 0, 7, 0, 0.05317782114028685, 243.56301232888623]
+2025-06-13 08:52:33 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test38.mp3
+2025-06-13 08:52:33 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:33 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:33 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test38.mp3'
+2025-06-13 08:52:33 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:34 - NSGA-II - INFO -  >> Metrics: {'time': 0.5813929900177754, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:34 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.08192062640024206)
+2025-06-13 08:52:34 - NSGA-II - DEBUG - FITNESS: 1.8653618905042308
+2025-06-13 08:52:34 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0'}
+2025-06-13 08:52:34 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:34 - NSGA-II - INFO - 39º Individual: {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '0', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:34 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 1.9839687010680658, 0.12706440953222486, 0, 0.053820106467396656, 241.66785580536353]
+2025-06-13 08:52:34 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test39.mp3
+2025-06-13 08:52:34 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:34 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:34 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test39.mp3'
+2025-06-13 08:52:34 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:35 - NSGA-II - INFO -  >> Metrics: {'time': 0.7846401240094565, 'size': 102284, 'peaq': -3.001, 'im': -1.191}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 0.8982679242117823, 0.960624481465241, 0.2185310316013915)
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FITNESS: 1.3299266210834868
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '236k', 'abr': 'True'}
+2025-06-13 08:52:35 - NSGA-II - INFO - 40º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '236k', 'abr': 'True'}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Genetic parameters: [2.997021825998093, 0, 7.381612893392437, 0, 1.9370980083565996, 236.24839061902642]
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test40.mp3
+2025-06-13 08:52:35 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:35 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:35 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test40.mp3'
+2025-06-13 08:52:35 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:35 - NSGA-II - INFO -  >> Metrics: {'time': 0.48315847699996084, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.2271365599759327)
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FITNESS: 1.8726226871830154
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '103k'}
+2025-06-13 08:52:35 - NSGA-II - INFO - 41º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '103k'}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0, 7, 0, 0.0548575477412826, 103.00062640405638]
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test41.mp3
+2025-06-13 08:52:35 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:35 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:35 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test41.mp3'
+2025-06-13 08:52:35 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:35 - NSGA-II - INFO -  >> Metrics: {'time': 0.43196749602793716, 'size': 61388, 'peaq': -2.762, 'im': -0.895}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Z-SCORES: (-0.4362495185361288, 1.4551230673165638, 1.271876777739572, -0.3028100260942993)
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FITNESS: 2.069951361211215
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '6', 'reservoir': '0'}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '6', 'reservoir': '0', 'b:a': '107k'}
+2025-06-13 08:52:35 - NSGA-II - INFO - 42º Individual: {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '6', 'reservoir': '0', 'b:a': '107k'}
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Genetic parameters: [3.6597252374163847, 0, 6.16321136508099, 0, 0.0548575477412826, 106.66979365220705]
+2025-06-13 08:52:35 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test42.mp3
+2025-06-13 08:52:35 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:35 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:36 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test42.mp3'
+2025-06-13 08:52:36 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:36 - NSGA-II - INFO -  >> Metrics: {'time': 0.7548958139959723, 'size': 71357, 'peaq': -3.907, 'im': -4.033}
+2025-06-13 08:52:36 - NSGA-II - DEBUG - Z-SCORES: (-0.4051808066794341, -1.2126557563444207, -2.027818173979519, 0.17456127377921377)
+2025-06-13 08:52:36 - NSGA-II - DEBUG - FITNESS: -1.62713886888752
+2025-06-13 08:52:36 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '6', 'reservoir': '0'}
+2025-06-13 08:52:36 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '6', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:36 - NSGA-II - INFO - 43º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '6', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:36 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0.020139260368574052, 6.313166813503885, 0, 0.05292401329397339, 241.66785580536353]
+2025-06-13 08:52:36 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test43.mp3
+2025-06-13 08:52:36 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:36 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:37 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test43.mp3'
+2025-06-13 08:52:37 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:37 - NSGA-II - INFO -  >> Metrics: {'time': 0.5876334779895842, 'size': 102284, 'peaq': -2.833, 'im': -0.979}
+2025-06-13 08:52:37 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.2896974808712098, 1.183548423391451, -0.07269557647680286)
+2025-06-13 08:52:37 - NSGA-II - DEBUG - FITNESS: 1.8027946907246872
+2025-06-13 08:52:37 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '12000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0'}
+2025-06-13 08:52:37 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '12000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:37 - NSGA-II - INFO - 44º Individual: {'ar': '12000', 'sample_fmt': 'fltp', 'compression_level': '2', 'reservoir': '0', 'b:a': '32k'}
+2025-06-13 08:52:37 - NSGA-II - DEBUG - Genetic parameters: [2.2411373286972287, 2, 2, 0, 0.004397485132258981, 4.408904075468044]
+2025-06-13 08:52:37 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test44.mp3
+2025-06-13 08:52:37 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:37 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:37 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test44.mp3'
+2025-06-13 08:52:37 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:37 - NSGA-II - INFO -  >> Metrics: {'time': 0.6269799709843937, 'size': 20780, 'peaq': -3.911, 'im': -4.095}
+2025-06-13 08:52:37 - NSGA-II - DEBUG - Z-SCORES: (-0.5628056677062219, -1.2219755076934546, -2.093012911712655, -0.01453131691423482)
+2025-06-13 08:52:37 - NSGA-II - DEBUG - FITNESS: -1.5677499815084284
+2025-06-13 08:52:37 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:37 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:37 - NSGA-II - INFO - 45º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:37 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:37 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test45.mp3
+2025-06-13 08:52:37 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:38 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:38 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test45.mp3'
+2025-06-13 08:52:38 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:38 - NSGA-II - INFO -  >> Metrics: {'time': 0.42730462300824, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:38 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.3097029544338272)
+2025-06-13 08:52:38 - NSGA-II - DEBUG - FITNESS: 1.8767510069059101
+2025-06-13 08:52:38 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:38 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '241k'}
+2025-06-13 08:52:38 - NSGA-II - INFO - 46º Individual: {'ar': '22050', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '241k'}
+2025-06-13 08:52:38 - NSGA-II - DEBUG - Genetic parameters: [3.6565588244184215, 0, 7, 0, 0.0548575477412826, 240.5236166111543]
+2025-06-13 08:52:38 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test46.mp3
+2025-06-13 08:52:38 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:38 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:38 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test46.mp3'
+2025-06-13 08:52:38 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:38 - NSGA-II - INFO -  >> Metrics: {'time': 0.42628074300591834, 'size': 101921, 'peaq': -3.906, 'im': -4.023}
+2025-06-13 08:52:38 - NSGA-II - DEBUG - Z-SCORES: (-0.3099271092987524, -1.2103258185071624, -2.01730289369998, -0.3112165130176588)
+2025-06-13 08:52:38 - NSGA-II - DEBUG - FITNESS: -1.6449923063168972
+2025-06-13 08:52:38 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:38 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:38 - NSGA-II - INFO - 47º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:38 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:38 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test47.mp3
+2025-06-13 08:52:38 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:38 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:39 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test47.mp3'
+2025-06-13 08:52:39 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:39 - NSGA-II - INFO -  >> Metrics: {'time': 0.45888955501141027, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:39 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.2630122828270641)
+2025-06-13 08:52:39 - NSGA-II - DEBUG - FITNESS: 1.874416473325572
+2025-06-13 08:52:39 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:39 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:39 - NSGA-II - INFO - 48º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:39 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0, 7, 0, 0.0548575477412826, 241.66785580536353]
+2025-06-13 08:52:39 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test48.mp3
+2025-06-13 08:52:39 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:39 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:39 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test48.mp3'
+2025-06-13 08:52:39 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:39 - NSGA-II - INFO -  >> Metrics: {'time': 0.4409452640102245, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:39 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.2895385706869989)
+2025-06-13 08:52:39 - NSGA-II - DEBUG - FITNESS: 1.8757427877185688
+2025-06-13 08:52:39 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:39 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:39 - NSGA-II - INFO - 49º Individual: {'ar': '16000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:39 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 0.08560097523727483, 7, 0, 0.0036137923578247154, 241.66785580536353]
+2025-06-13 08:52:39 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test49.mp3
+2025-06-13 08:52:39 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:39 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:39 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test49.mp3'
+2025-06-13 08:52:39 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:40 - NSGA-II - INFO -  >> Metrics: {'time': 0.4139935559942387, 'size': 102284, 'peaq': -2.81, 'im': -0.952}
+2025-06-13 08:52:40 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3432860511281557, 1.2119396801462043, -0.32938014286734896)
+2025-06-13 08:52:40 - NSGA-II - DEBUG - FITNESS: 1.8777348663275863
+2025-06-13 08:52:40 - NSGA-II - DEBUG - (+) Saved DataFrame into history/evolution_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:40 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:40 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '245k'}
+2025-06-13 08:52:40 - NSGA-II - INFO - 50º Individual: {'ar': '48000', 'sample_fmt': 's16p', 'compression_level': '7', 'reservoir': '0', 'b:a': '245k'}
+2025-06-13 08:52:40 - NSGA-II - DEBUG - Genetic parameters: [7.8692335975451835, 0, 7, 0, 0.005239310840858234, 244.51588381981344]
+2025-06-13 08:52:40 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test50.mp3
+2025-06-13 08:52:40 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:40 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:40 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test50.mp3'
+2025-06-13 08:52:40 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:40 - NSGA-II - INFO -  >> Metrics: {'time': 0.5649456919927616, 'size': 162092, 'peaq': -3.735, 'im': -2.783}
+2025-06-13 08:52:40 - NSGA-II - DEBUG - Z-SCORES: (-0.1224022360788531, -0.811906448335958, -0.7134081390372421, -0.10623397273980065)
+2025-06-13 08:52:40 - NSGA-II - DEBUG - FITNESS: -0.9594160733707141
+2025-06-13 08:52:40 - NSGA-II - DEBUG - FFmpeg Params (before mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0'}
+2025-06-13 08:52:40 - NSGA-II - DEBUG - FFmpeg Params (after mode handling): {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:40 - NSGA-II - INFO - 51º Individual: {'ar': '16000', 'sample_fmt': 'fltp', 'compression_level': '7', 'reservoir': '0', 'b:a': '242k'}
+2025-06-13 08:52:40 - NSGA-II - DEBUG - Genetic parameters: [2.9970236903654652, 1.9139498790121048, 7.028379483938895, 0, 0.05417712569813689, 241.66785580536353]
+2025-06-13 08:52:40 - NSGA-II - DEBUG - Output: ./media/output_2025-06-13_08-52-09/test51.mp3
+2025-06-13 08:52:40 - NSGA-II.orch - DEBUG - ORCHESTRATOR module loaded.
+2025-06-13 08:52:40 - NSGA-II.comp - DEBUG - COMPRESSOR module loaded.
+2025-06-13 08:52:41 - NSGA-II.comp - DEBUG - Conversion successful: './media/test.wav' converted to './media/output_2025-06-13_08-52-09/test51.mp3'
+2025-06-13 08:52:41 - NSGA-II.peaq - DEBUG - PEAQ module loaded.
+2025-06-13 08:52:41 - NSGA-II - INFO -  >> Metrics: {'time': 0.8574599160056096, 'size': 102284, 'peaq': -2.811, 'im': -0.953}
+2025-06-13 08:52:41 - NSGA-II - DEBUG - Z-SCORES: (-0.3087958080244039, 1.3409561132908976, 1.2108881521182506, 0.3261774559857756)
+2025-06-13 08:52:41 - NSGA-II - DEBUG - FITNESS: 1.842311590139286
+2025-06-13 08:52:41 - NSGA-II - DEBUG - (+) Saved DataFrame into history/evolution_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:41 - NSGA-II - INFO - HALL OF FAME (Pareto Front)
+2025-06-13 08:52:41 - NSGA-II - INFO - Individual 0: {'params': {'sample_rate': 48000, 'sample_format': 'fltp', 'compression_level': 0, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}, 'file_size': -0.5640024161617311, 'peaq_score': -0.7583178780790132, 'distortion_index': -0.6124614483536751, 'processing_time': 0.01868153451899726, 'fitness': -0.6609891812302001}
+2025-06-13 08:52:41 - NSGA-II - DEBUG - (+) Saved DataFrame into results/results_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:41 - NSGA-II - INFO - Individual 1: {'params': {'sample_rate': 48000, 'sample_format': 'fltp', 'compression_level': 2, 'reservoir': False, 'encoding_mode': 'Bitrate: 32k (CBR)'}, 'file_size': -0.5640024161617311, 'peaq_score': -0.8561752672438698, 'distortion_index': -0.803839549441271, 'processing_time': -0.25312398151264937, 'fitness': -0.8026697249197531}
+2025-06-13 08:52:41 - NSGA-II - DEBUG - (+) Saved DataFrame into results/results_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:41 - NSGA-II - INFO - Individual 2: {'params': {'sample_rate': 16000, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 103k (CBR)'}, 'file_size': -0.4362495185361288, 'peaq_score': 1.4551230673165638, 'distortion_index': 1.271876777739572, 'processing_time': -0.3028100260942993, 'fitness': 2.069951361211215}
+2025-06-13 08:52:41 - NSGA-II - DEBUG - (+) Saved DataFrame into results/results_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:41 - NSGA-II - INFO - Individual 3: {'params': {'sample_rate': 22050, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 107k (CBR)'}, 'file_size': -0.4051808066794341, 'peaq_score': -1.2126557563444207, 'distortion_index': -2.026766645951565, 'processing_time': -0.32162756180069396, 'fitness': -1.6020139687001387}
+2025-06-13 08:52:41 - NSGA-II - DEBUG - (+) Saved DataFrame into results/results_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:41 - NSGA-II - INFO - Individual 4: {'params': {'sample_rate': 22050, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 242k (CBR)'}, 'file_size': -0.3099271092987524, 'peaq_score': -1.2103258185071624, 'distortion_index': -2.01730289369998, 'processing_time': -0.3393725579044908, 'fitness': -1.6435845040725556}
+2025-06-13 08:52:41 - NSGA-II - DEBUG - (+) Saved DataFrame into results/results_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:41 - NSGA-II - INFO - Individual 5: {'params': {'sample_rate': 16000, 'sample_format': 's16p', 'compression_level': 7, 'reservoir': False, 'encoding_mode': 'Bitrate: 242k (CBR)'}, 'file_size': -0.3087958080244039, 'peaq_score': 1.3432860511281557, 'distortion_index': 1.2119396801462043, 'processing_time': -0.3899228822900157, 'fitness': 1.8807620032987196}
+2025-06-13 08:52:41 - NSGA-II - DEBUG - (+) Saved DataFrame into results/results_NSGA-II_2025-06-13_08-52-09.csv
+2025-06-13 08:52:41 - NSGA-II - INFO - EXECUTION FINISHED SUCCESSFULLY
+2025-06-13 08:52:41 - NSGA-II - INFO -  > Total Execution Time: 32 seconds
