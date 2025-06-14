@@ -65,7 +65,7 @@ def run_peaq(ref_file: str,
         command.append("--advanced")
     command.extend([ref_file, test_file])
 
-    if verbose: print(f">> Running command: {' '.join(command)}")
+    if verbose: peaq_logger.debug(f">> Running command: {' '.join(command)}")
 
     start_time = perf_counter()
     try:
@@ -75,9 +75,9 @@ def run_peaq(ref_file: str,
 
         if verbose: print(f"⏰ Elapsed time: {elapsed:.3f} seconds")
         metrics_value = result.stdout
+        if verbose: peaq_logger.debug(f">> Captured: {', '.join(metrics_value)}")
         if result.stderr:
-            print("Stderr:")
-            print(result.stderr)
+            peaq_logger.error(f"Stderr: {result.stderr}")
 
         return metrics_value, elapsed
 
