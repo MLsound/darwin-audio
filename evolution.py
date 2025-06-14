@@ -8,6 +8,11 @@ import sys
 import pandas as pd
 from datetime import datetime
 
+# CLI RUN: python ./evolution_norm.py
+# Optional flags:
+#   -d for degub mode
+#   -v for more verbose
+
 # INITIAL SETUP:
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
@@ -16,6 +21,7 @@ algo = "NSGA-II"
 strategy_notebook = "Exploring different algorithms."
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
+WEIGHTS = [-0.5, 1.0, 0.3, -0.05]
 
 # AUDIO FILES
 # Test files:
@@ -37,7 +43,7 @@ logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
                     level='DEBUG' if debug else 'INFO', console_output=verbose)
 count = 1 # Counter for evaluations, used for tracking
 total_time = None
-df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time'])
+df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time', 'fitness'])
 hof_df = df.copy() # Hall of fame DataFrame for best individuals
 
 def save_csv(data, csv_file=f'history/{history_filename}.csv'):
@@ -64,7 +70,7 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 # FOR TESTING PURPOSES:
 # Uncomment the following lines to simulate the evaluation function and comment import from orchestrator.py
 
-# def evaluate(file, params):
+# def evaluate(file, params, verbose, debug_mode, log_file):
 #     """
 #     Simulated evaluation function that mimics the behavior of evaluating audio files.
 #     This is a placeholder for the actual evaluation logic.
@@ -77,19 +83,22 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 #     print(f"Simulating evaluation for file: {file} with params: {params}")
 #     # Simulate some metrics for demonstration purposes
 #     return {
-#         'size': rnd.randint(1000000, 5000000),  # Simulated file size in bytes
+#         'size': rnd.randint(50000, 500000),  # Simulated file size in bytes
 #         'peaq': rnd.uniform(-4.0, 0.0),         # Simulated PEAQ score in range -4 to 0
 #         'im': rnd.uniform(-4.0, 0.0),           # Simulated Distortion Index in range -4 to 0
-#         'time': rnd.uniform(0.1, 2.0)            # Simulated processing time in seconds
+#         'time': rnd.uniform(0.01, 2.0)            # Simulated processing time in seconds
 #     }
+
+# def printt(value,n=None,char=None):
+#     print(value)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 # --- Evolutionary Algorithm Parameters ---
 POPULATION_SIZE = 50
-MAX_GENERATIONS = 20
+MAX_GENERATIONS = 100
 P_CROSSOVER = 0.8  # Probabilidad de cruce
-P_MUTATION = 0.1   # Probabilidad de mutación
+P_MUTATION = 0.2   # Probabilidad de mutación
 
 # --- Gene Definitions (Hyperparameters) ---
 
@@ -135,6 +144,53 @@ LOW_MODE_VAL, UP_MODE_VAL = 0.0, 320.0 # Max bitrate for CBR, max quality value 
 # Total Number of Dimensions/Genes
 N_DIM = 6 # (ar, sample_fmt, compression_level, reservoir, encoding_mode, mode_value)
 
+# --- Fitness Function ---
+def compute_z_score(file_size, peaq_score, distortion_index, processing_time):
+    """
+    Computes a tuple of normalized Z-scores for multiple objectives.
+    These scores will be used directly by DEAP for multi-objective optimization.
+
+    Args:
+        file_size (float): The size of the file in kilobytes.
+        peaq_score (float): The PEAQ score.
+        distortion_index (float): The distortion index.
+        processing_time (float): The processing time in seconds.
+
+    Returns:
+        tuple: A tuple containing the normalized Z-scores for (file_size, peaq_score, distortion_index, processing_time).
+               (DEAP expects fitness as a tuple)
+    """
+    # Means and stds from your data, used for Z-score normalization
+    # These values have been derived from prevoious runs.
+    means = [196.647594, -3.386533, -2.104551, 0.636810]
+    stds = [313.349057, 0.429196, 0.950997, 0.676472]
+
+    raw_values = [file_size, peaq_score, distortion_index, processing_time]
+
+    z_scores = []
+    for x, mu, sigma in zip(raw_values, means, stds):
+        if sigma != 0:
+            z_scores.append((x - mu) / sigma)
+        else:
+            # If standard deviation is zero, it means the metric is constant.
+            # Its Z-score is typically undefined or 0 (if x == mu).
+            # Here, we treat it as 0, implying it doesn't contribute to the variability.
+            z_scores.append(0.0)
+
+    # Return the tuple of Z-scores directly for multi-objective optimization
+    return tuple(z_scores)
+
+def compute_fitness(z_scores):
+    """
+    Computes the weighted sum of Z-scores for fitness evaluation.
+    Args:
+        z_scores (tuple): Tuple of normalized Z-scores (file_size, peaq_score, distortion_index, processing_time).
+    Returns:
+        float: Weighted sum representing the fitness.
+    """
+    #weights = [-0.5, 1.0, 0.3, -0.05]
+    return sum(w * z for w, z in zip(WEIGHTS, z_scores))
+
 # --- DEAP Configuration ---
 # Define the objectives: minimize size, maximize PEAQ, maximize Distortion Index, MINIMIZE PROCESSING TIME
 # weights=(-1.0, 1.0, 1.0, -1.0) means:
@@ -143,7 +199,7 @@ N_DIM = 6 # (ar, sample_fmt, compression_level, reservoir, encoding_mode, mode_v
 # - maximize the third value (distortion_index)
 # - minimize the fourth value (processing_time)
 # creator.create("FitnessMulti", base.Fitness, weights=(-1.0, 1.0, 1.0, -1.0))
-creator.create("FitnessMulti", base.Fitness, weights=(-0.5, 1, 0.3, -0.05))
+creator.create("FitnessMulti", base.Fitness, weights=tuple(WEIGHTS))
 creator.create("Individual", list, fitness=creator.FitnessMulti)
 
 toolbox = base.Toolbox()
@@ -204,6 +260,14 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     metrics = None
     print("\n") # Vertical space for clarity in output
 
+    # Initialize with values that would result in a very low fitness score in case of error
+    # These will be passed to compute_fitness, which will then generate the penalized Z-scores.
+    file_size = float('inf') # High value (bad for minimization)
+    peaq_score = -float('inf') # Low value (bad for maximization)
+    distortion_index = -float('inf') # Low value (bad for maximization)
+    processing_time = float('inf') # High value (bad for minimization)
+    fitness = None
+    
     # Extract and process genes
     sample_rate_idx = int(round(individual[0]))
     # Clamp the index to ensure it's within valid range for SUPPORTED_SAMPLE_RATES
@@ -245,9 +309,9 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 
     if debug: logger.debug(f"FFmpeg Params (after mode handling): {ffmpeg_params}")
 
-    file_size = float('inf') # Initialize with a large value for minimization
-    peaq_score = 0.0         # Initialize with a low value for maximization
-    distortion_index = 0.0   # Initialize with a low value for maximization
+    # file_size = float('inf') # Initialize with a large value for minimization
+    # peaq_score = 0.0         # Initialize with a low value for maximization
+    # distortion_index = 0.0   # Initialize with a low value for maximization
 
     # Print current individual and its ffmpeg parameters for debugging/tracking
     print(f"🧬 Evaluating Individual {count}º: {individual}")
@@ -261,11 +325,23 @@ def evaluate_ffmpeg_params(individual, input_file_path):
         count += 1 # Increment count for each evaluation
 
         if metrics:
-            file_size = metrics['size'] / 1024.0
+            file_size = metrics['size'] / 1024.0 # Convert to KB
             peaq_score = metrics['peaq']
             distortion_index = metrics['im']
             processing_time = metrics['time']
     
+            # Compute the tuple of normalized Z-scores using the provided function
+            fitness_values = compute_z_score(file_size, peaq_score, distortion_index, processing_time)
+            fitness = compute_fitness(fitness_values)
+            logger.debug(f"Z-SCORES: {fitness_values}")
+            logger.debug(f"FITNESS: {fitness}")
+            return fitness_values # Return the tuple of fitness values as expected by DEAP
+        else:
+            logger.warning(f"Evaluation for individual {individual} returned no metrics. Assigning penalized fitness.")
+            # If no metrics are returned (e.g., evaluation failed), assign a very low fitness tuple
+            # This will result in very poor Z-scores for all objectives.
+            return (float('inf'), -float('inf'), -float('inf'), float('inf')) # Penalizing all objectives
+
     # Add error handling
     except Exception as e:
         logger.exception(f"General Error during evaluation for individual {individual}: {e}")
@@ -284,7 +360,8 @@ def evaluate_ffmpeg_params(individual, input_file_path):
             'file_size': file_size,
             'peaq_score': peaq_score,
             'distortion_index': distortion_index,
-            'processing_time': processing_time
+            'processing_time': processing_time,
+            'fitness': fitness
             }
 
             # Save DataFrame to CSV after each evaluation
@@ -313,6 +390,7 @@ def main_evolutionary_algorithm():
     logger.info("GENETIC ALGORITHM STARTED")
     logger.info(f" Input: {input_wav}")
     logger.debug(f" Algorithm: {algo}")
+    logger.debug(f" Multi-objective weights: {WEIGHTS}")
     logger.info(f" Strategy: {strategy_notebook}")
     logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
     logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
@@ -359,7 +437,7 @@ def main_evolutionary_algorithm():
         print(f"  Encoding Mode: {mode_str}")
         print(f"  Raw Gene Values: {np.round(ind, 2)}")
         print(f"  Fitness (Size MB, PEAQ, Distortion, Time): {np.round(ind.fitness.values, 4)}")
-
+        
         # Save this individual's data to CSV
         hof_df.loc[len(hof_df)] = {
             'params': {
@@ -372,7 +450,8 @@ def main_evolutionary_algorithm():
             'file_size': ind.fitness.values[0],
             'peaq_score': ind.fitness.values[1],
             'distortion_index': ind.fitness.values[2],
-            'processing_time': ind.fitness.values[3]
+            'processing_time': ind.fitness.values[3],
+            'fitness': compute_fitness(ind.fitness.values)
         }
         
         logger.info(f'Individual {hof_count}: {hof_df.iloc[-1].to_dict()}')
