@@ -2,7 +2,7 @@ import os
 import random as rnd
 import numpy as np
 from deap import base, creator, tools, algorithms
-from orchestrator import evaluate, printt
+from orchestrator import evaluate, printt, show_counter
 from logger import setup_logger
 import sys
 import pandas as pd
@@ -98,7 +98,8 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 POPULATION_SIZE = 50
 MAX_GENERATIONS = 100
 P_CROSSOVER = 0.8  # Probabilidad de cruce
-P_MUTATION = 0.2   # Probabilidad de mutación
+P_MUTATION = 0.1   # Probabilidad de mutación
+TOTAL_INDIV = POPULATION_SIZE*MAX_GENERATIONS # Total amount of individuals to test
 
 # --- Gene Definitions (Hyperparameters) ---
 
@@ -321,6 +322,7 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 
     try:
         # SHOULD CALL orchestrator.py here
+        show_counter(count/TOTAL_INDIV)
         metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug, log_file=logger)
         count += 1 # Increment count for each evaluation
 

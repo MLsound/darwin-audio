@@ -11,12 +11,19 @@ debug = False # If True, creates an output folder and adds an index to the outpu
 add_idx = False # If True, adds an index to the output file name
 
 idx = 0
+PROGRESS = 0
 processed = None
 
 def printt(message,n=80, char='='):
     sep = char*int((n-len(message))/2)
     message = f' {message} '
     print(sep,message,sep)
+
+def show_counter(percent):
+    global PROGRESS
+    if percent > 1:
+        percent=1
+    PROGRESS = round(percent*100,2)
 
 def build_output(file: str) -> str:
     global idx, add_idx
@@ -104,7 +111,7 @@ def get_file_size(file_path: str) -> int:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_file=None):
-    global processed, verbose, debug, logger
+    global processed, verbose, debug, logger, PROGRESS
 
     logger = log_file
 
@@ -155,7 +162,7 @@ def evaluate(file, params, verbose_sdk: bool = True, debug_mode = False, log_fil
 
 
     print(f"\n⏰ Process time: {process_time} seconds")
-    printt("Finished evaluation")
+    printt(f"Finished evaluation ({PROGRESS}%)")
     print()
     return metrics
 
