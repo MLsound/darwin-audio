@@ -95,7 +95,7 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 # --- Evolutionary Algorithm Parameters ---
-POPULATION_SIZE = 50
+POPULATION_SIZE = 100
 MAX_GENERATIONS = 100
 P_CROSSOVER = 0.8  # Probabilidad de cruce
 P_MUTATION = 0.1   # Probabilidad de mutación
@@ -323,8 +323,8 @@ def evaluate_ffmpeg_params(individual, input_file_path):
     try:
         # SHOULD CALL orchestrator.py here
         show_counter(count/TOTAL_INDIV)
-        metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug, log_file=logger)
         count += 1 # Increment count for each evaluation
+        metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug, log_file=logger)
 
         if metrics:
             file_size = metrics['size'] / 1024.0 # Convert to KB
@@ -474,8 +474,6 @@ if __name__ == "__main__":
         logger.setLevel('DEBUG')
         if verbose: print("NOTE: Debug mode enabled by flag.")
 
-    #global input_wav
-    
     if not os.path.exists(input_wav):
         print(f"Error: Input file not found at {input_wav}")
         print("Please update 'input_wav' to a valid path.")
