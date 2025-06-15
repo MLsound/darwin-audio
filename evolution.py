@@ -24,10 +24,10 @@ history_filename = f"evolution_{algo}_{timestamp}"
 WEIGHTS = [-0.5, 1.0, 0.3, -0.05]
 
 # --- Evolutionary Algorithm Parameters ---
-POPULATION_SIZE = 100
+POPULATION_SIZE = 50
 MAX_GENERATIONS = 50
-P_CROSSOVER = 0.8  # Probabilidad de cruce
-P_MUTATION = 0.1   # Probabilidad de mutación
+P_CROSSOVER = 0.95  # Probabilidad de cruce
+P_MUTATION = 0.05   # Probabilidad de mutación
 TOTAL_RUNS = POPULATION_SIZE*MAX_GENERATIONS # Total amount of individuals to test
 
 # ---------- Audio File Selector ----------
