@@ -24,7 +24,7 @@ history_filename = f"evolution_{algo}_{timestamp}"
 WEIGHTS = [-0.5, 1.0, 0.3, -0.05]
 
 # --- Evolutionary Algorithm Parameters ---
-POPULATION_SIZE = 25
+POPULATION_SIZE = 100
 MAX_GENERATIONS = 50
 P_CROSSOVER = 0.8  # Probabilidad de cruce
 P_MUTATION = 0.1   # Probabilidad de mutación
