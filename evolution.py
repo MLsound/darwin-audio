@@ -23,7 +23,14 @@ timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
 WEIGHTS = [-0.5, 1.0, 0.3, -0.05]
 
-# AUDIO FILES
+# --- Evolutionary Algorithm Parameters ---
+POPULATION_SIZE = 50
+MAX_GENERATIONS = 50
+P_CROSSOVER = 0.8  # Probabilidad de cruce
+P_MUTATION = 0.1   # Probabilidad de mutación
+TOTAL_RUNS = POPULATION_SIZE*MAX_GENERATIONS # Total amount of individuals to test
+
+# ---------- Audio File Selector ----------
 # Test files:
 # Input WAV file path (any music file in WAV format)
 # input_wav = "./media/test.wav" # For development purposes only (5sec|32kHz|16bits)
@@ -37,38 +44,11 @@ input_wav = "./media/4test.wav" # String concert recording (11sec|96kHz|24bits)
 #input_wav = "./media/Mamita.wav" # Band Homestudio recording (2min|44,1kHz|24bits) aka 3test
 #input_wav = "./media/Bartok.wav" # String concert (33min|96kHz|24bits) aka 4test
 #input_wav = "./media/Bffmpeg -ss 00:00:00 -i Bartok_cut.wav -to 00:00:12 -c:a pcm_s32le 4test.wavartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
-
-# Setup the logger for the evolutionary algorithm
-logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
-                    level='DEBUG' if debug else 'INFO', console_output=verbose)
-count = 1 # Counter for evaluations, used for tracking
-total_time = None
-df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time', 'fitness'])
-hof_df = df.copy() # Hall of fame DataFrame for best individuals
-
-def save_csv(data, csv_file=f'history/{history_filename}.csv'):
-    """
-    Saves the DataFrame to a CSV file.
-    Args:
-        data (pd.DataFrame): The DataFrame to save.
-        csv_file (str): The name of the CSV file to save the DataFrame to.
-    """
-    if not csv_file.endswith('.csv'):
-        csv_file = f"{csv_file}.csv"
-    if data is None or data.empty:
-        print("DataFrame is empty. No data to save.")
-        return
-    # Ensure the directory exists
-    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
-    # Save the DataFrame to CSV
-    data.to_csv(csv_file, index=False)
-    if verbose: print(f"Saving DataFrame to {csv_file}...")
-    logger.debug(f"(+) Saved DataFrame into {csv_file}")
     
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# FOR TESTING PURPOSES:
-# Uncomment the following lines to simulate the evaluation function and comment import from orchestrator.py
+# # FOR TESTING PURPOSES:
+# # Uncomment the following lines to simulate the evaluation function and comment import from orchestrator.py
 
 # def evaluate(file, params, verbose, debug_mode, log_file):
 #     """
@@ -93,14 +73,6 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 #     print(value)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-
-# --- Evolutionary Algorithm Parameters ---
-POPULATION_SIZE = 50
-MAX_GENERATIONS = 50
-P_CROSSOVER = 0.8  # Probabilidad de cruce
-P_MUTATION = 0.1   # Probabilidad de mutación
-TOTAL_INDIV = POPULATION_SIZE*MAX_GENERATIONS # Total amount of individuals to test
-
 # --- Gene Definitions (Hyperparameters) ---
 
 # 1. Audio Sample Rate (ar)
@@ -141,9 +113,17 @@ LOW_QUAL, UP_QUAL = 0.0, 9.0     # for 'aq' (VBR quality, 0 is best, 9 is worst)
 # We'll treat it as a float and then convert/round as needed based on the encoding mode.
 LOW_MODE_VAL, UP_MODE_VAL = 0.0, 320.0 # Max bitrate for CBR, max quality value for aq/abr (adjusted)
 
-
 # Total Number of Dimensions/Genes
 N_DIM = 6 # (ar, sample_fmt, compression_level, reservoir, encoding_mode, mode_value)
+
+# ---------- Intializer ----------
+# Setup the logger for the evolutionary algorithm
+logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
+                    level='DEBUG' if debug else 'INFO', console_output=verbose)
+count = 1 # Counter for evaluations, used for tracking
+total_time = None
+df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time', 'fitness'])
+hof_df = df.copy() # Hall of fame DataFrame for best individuals
 
 # --- Fitness Function ---
 def compute_z_score(file_size, peaq_score, distortion_index, processing_time):
@@ -191,6 +171,25 @@ def compute_fitness(z_scores):
     """
     #weights = [-0.5, 1.0, 0.3, -0.05]
     return sum(w * z for w, z in zip(WEIGHTS, z_scores))
+
+def save_csv(data, csv_file=f'history/{history_filename}.csv'):
+    """
+    Saves the DataFrame to a CSV file.
+    Args:
+        data (pd.DataFrame): The DataFrame to save.
+        csv_file (str): The name of the CSV file to save the DataFrame to.
+    """
+    if not csv_file.endswith('.csv'):
+        csv_file = f"{csv_file}.csv"
+    if data is None or data.empty:
+        print("DataFrame is empty. No data to save.")
+        return
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
+    # Save the DataFrame to CSV
+    data.to_csv(csv_file, index=False)
+    if verbose: print(f"Saving DataFrame to {csv_file}...")
+    logger.debug(f"(+) Saved DataFrame into {csv_file}")
 
 # --- DEAP Configuration ---
 # Define the objectives: minimize size, maximize PEAQ, maximize Distortion Index, MINIMIZE PROCESSING TIME
@@ -322,9 +321,9 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 
     try:
         # SHOULD CALL orchestrator.py here
-        show_counter(count/TOTAL_INDIV)
-        count += 1 # Increment count for each evaluation
+        show_counter((count+1)/TOTAL_RUNS)
         metrics = evaluate(input_file_path, ffmpeg_params, verbose, debug_mode=debug, log_file=logger)
+        count += 1 # Increment count for each evaluation
 
         if metrics:
             file_size = metrics['size'] / 1024.0 # Convert to KB
@@ -474,6 +473,8 @@ if __name__ == "__main__":
         logger.setLevel('DEBUG')
         if verbose: print("NOTE: Debug mode enabled by flag.")
 
+    #global input_wav
+    
     if not os.path.exists(input_wav):
         print(f"Error: Input file not found at {input_wav}")
         print("Please update 'input_wav' to a valid path.")
