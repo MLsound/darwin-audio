@@ -36,7 +36,7 @@ def convert_wav_to_mp3(input_file: str,
     start = perf_counter()
 
     if params is not None:
-        if verbose: print(f"Processing with parameters: {params}")
+        if verbose: print(f"Parameters: {params}")
     else:
         print("No additional parameters provided, using default settings.")
         params = {
