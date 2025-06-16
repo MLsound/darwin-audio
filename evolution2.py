@@ -1,4 +1,4 @@
-# NSGA-II
+# NSGA-III
 import os
 import random as rnd
 import numpy as np
@@ -18,7 +18,7 @@ from datetime import datetime
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
-algo = "NSGA-II"
+algo = "NSGA-III"
 strategy_notebook = "Exploring different algorithms."
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
@@ -224,7 +224,11 @@ toolbox.register("individual", tools.initCycle, creator.Individual,
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 # Genetic Operators
-toolbox.register("select", tools.selNSGA2)
+# NSGA-III requires reference points
+# The number of objectives is 4 (Size, PEAQ, Distortion, Time)
+N_OBJECTIVES = 4
+REF_POINTS = tools.uniform_reference_points(N_OBJECTIVES, p=12) # 'p' is the number of divisions along each axis. Adjust as needed.
+toolbox.register("select", tools.selNSGA3, ref_points=REF_POINTS)
 
 # Bounds for crossover and mutation (must match N_DIM)
 # Ensure they are in the order of gene generation
@@ -386,7 +390,7 @@ def main_evolutionary_algorithm():
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
 
-    # Run the evolutionary algorithm (NSGA-II))
+    # Run the evolutionary algorithm (NSGA-III))
     print("\n")
     printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
     logger.info("GENETIC ALGORITHM STARTED")
@@ -396,7 +400,8 @@ def main_evolutionary_algorithm():
     logger.info(f" Strategy: {strategy_notebook}")
     logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
     logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
-    # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
+    # selNSGA3 will handle the selection and archive maintenance internally.
+    # The 'mu' parameter effectively controls the size of the next generation population.
     algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
                               ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
