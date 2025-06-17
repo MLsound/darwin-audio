@@ -1,4 +1,4 @@
-# NSGA-III
+# MOEA/D
 import os
 import random as rnd
 import numpy as np
@@ -18,18 +18,33 @@ from datetime import datetime
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
-algo = "NSGA-III"
+algo = "MOEA-D"
 strategy_notebook = "Exploring different algorithms."
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
 WEIGHTS = [-0.5, 1.0, 0.3, -0.05]
 
 # --- Evolutionary Algorithm Parameters ---
-POPULATION_SIZE = 50
-MAX_GENERATIONS = 100
-P_CROSSOVER = 0.95  # Probabilidad de cruce
-P_MUTATION = 0.01   # Probabilidad de mutación
-TOTAL_RUNS = POPULATION_SIZE*MAX_GENERATIONS # Total amount of individuals to test
+# IMPORTANT: POPULATION_SIZE is implicitly derived from H_DIVISIONS and N_OBJECTIVES.
+#POPULATION_SIZE = 50 # MOEA/D population is defined by specific parameters
+MAX_GENERATIONS = 25  # Total number of evaluations/iterations for PAES
+P_CROSSOVER = 0.95     # Probabilidad de cruce - Good value.
+P_MUTATION = 0.01      # Probabilidad de mutación - Good value (assuming per-gene or fine-tuned).
+
+# --- MOEA/D Specific Parameters (These determine your effective POPULATION_SIZE) ---
+NEIGHBORHOOD_PERCENT = 0.05  # Typically, NEIGHBORHOOD_SIZE is between 5% to 20% of the total subproblems. 
+N_OBJECTIVES = 4       # Size MB, PEAQ, Distortion, Time (Fixed by your problem)
+H_DIVISIONS = 8        # Number of divisions for reference points (for uniform_weights)
+# For 4 objectives, common starting points for H_DIVISIONS can be anywhere from 8 to 20.
+
+# --- Total Evaluations Calculation ---
+# Calculate the effective population size based on MOEA/D specific parameters
+import math
+N_SUBPROBLEMS = math.comb(H_DIVISIONS + N_OBJECTIVES - 1, N_OBJECTIVES - 1)
+NEIGHBORHOOD_SIZE = max(int(N_SUBPROBLEMS * 0.05), 2)  # T - Size of the neighborhood in MOEA/D
+TOTAL_RUNS = N_SUBPROBLEMS * MAX_GENERATIONS
+print("POPULATION:")
+print(MAX_GENERATIONS, N_SUBPROBLEMS, TOTAL_RUNS, sep=" -> ")
 
 # ---------- Audio File Selector ----------
 # Test files:
@@ -194,11 +209,9 @@ def save_csv(data, csv_file=f'history/{history_filename}.csv'):
 
 # --- DEAP Configuration ---
 # Define the objectives: minimize size, maximize PEAQ, maximize Distortion Index, MINIMIZE PROCESSING TIME
-# weights=(-1.0, 1.0, 1.0, -1.0) means:
-# - minimize the first value (file_size)
-# - maximize the second value (peaq_score)
-# - maximize the third value (distortion_index)
-# - minimize the fourth value (processing_time)
+# Note: For MOEA/D's aggregation functions, you might need to convert 'maximize'
+# objectives to 'minimize' by negating their values.
+# However, the FitnessMulti weights still define the initial direction for sorting.
 # creator.create("FitnessMulti", base.Fitness, weights=(-1.0, 1.0, 1.0, -1.0))
 creator.create("FitnessMulti", base.Fitness, weights=tuple(WEIGHTS))
 creator.create("Individual", list, fitness=creator.FitnessMulti)
@@ -224,11 +237,10 @@ toolbox.register("individual", tools.initCycle, creator.Individual,
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 # Genetic Operators
-# NSGA-III requires reference points
-# The number of objectives is 4 (Size, PEAQ, Distortion, Time)
-N_OBJECTIVES = 4
-REF_POINTS = tools.uniform_reference_points(N_OBJECTIVES, p=12) # 'p' is the number of divisions along each axis. Adjust as needed.
-toolbox.register("select", tools.selNSGA3, ref_points=REF_POINTS)
+#toolbox.register("select", tools.selNSGA2)
+# MOEA/D does not use a global 'select' function like NSGA-II/III/SPEA2
+# The selection logic is integrated into the MOEA/D main loop, choosing from neighbors.
+# We will use cxSimulatedBinaryBounded and mutPolynomialBounded as before.
 
 # Bounds for crossover and mutation (must match N_DIM)
 # Ensure they are in the order of gene generation
@@ -379,10 +391,86 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 # Register the evaluation function with the toolbox
 toolbox.register("evaluate", evaluate_ffmpeg_params, input_file_path=input_wav)
 
+# --- MOEA/D Specific Functions ---
+def tchebycheff(ind_fitness, weights, ideal_point):
+    """
+    Tchebycheff aggregation function for MOEA/D.
+    Assumes all objectives are to be minimized (maximized objectives are negated).
+    """
+    # Objective weights in FitnessMulti are: (-0.5, 1, 0.3, -0.05)
+    # Typically, MOEA/D assumes minimization.
+    # So, PEAQ and Distortion (originally maximized) need to be negated.
+    # File Size and Time are already minimized.
+
+    # Ensure fitness values are floats for calculation
+    obj_values = np.array(ind_fitness)
+    # Negate objectives that were originally maximized for DEAP's weights
+    # Based on creator.create("FitnessMulti", base.Fitness, weights=(-0.5, 1, 0.3, -0.05))
+    obj_values[1] = -obj_values[1] # Negate PEAQ for minimization
+    obj_values[2] = -obj_values[2] # Negate Distortion for minimization
+
+    # Compute the Tchebycheff value
+    diff = np.abs(obj_values - ideal_point)
+    weighted_diff = weights * diff
+    return np.max(weighted_diff)
+
 # --- Main Evolutionary Algorithm Loop ---
 def main_evolutionary_algorithm():
+
+    print("\n")
+    printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
+    logger.info("GENETIC ALGORITHM STARTED")
+    logger.info(f" Input: {input_wav}")
+    logger.debug(f" Algorithm: {algo}")
+    logger.debug(f" Multi-objective weights: {WEIGHTS}")
+    logger.info(f" Strategy: {strategy_notebook}")
+    logger.info(f" Population Size: {N_SUBPROBLEMS}, Max Generations: {MAX_GENERATIONS}")
+    logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
+    logger.info(f" Reference Points: {H_DIVISIONS}, Neighborhood Size: {NEIGHBORHOOD_SIZE}")
+    logger.info(f" Total runs: {TOTAL_RUNS}")
+
+    # Run the evolutionary algorithm (MOEA/D)
+    hof = tools.ParetoFront() # Hall of fame for non-dominated solutions
+
+    # 1. Generate uniform weights for subproblems
+    # Using H_DIVISIONS for the number of divisions, results in POPULATION_SIZE weight vectors
+    moead_weights = tools.uniform_reference_points(N_OBJECTIVES, H_DIVISIONS)
+    logger.debug(f"MOEA/D weights: {moead_weights}")
+    # Ensure POPULATION_SIZE matches the number of weights generated
+    global POPULATION_SIZE
+    POPULATION_SIZE = len(moead_weights)
+    logger.info(f"MOEA/D: Adjusting POPULATION_SIZE to {POPULATION_SIZE} based on {H_DIVISIONS} divisions.")
+
+    # 2. Initialize population and hof
     pop = toolbox.population(n=POPULATION_SIZE) # Intialize population
-    hof = tools.ParetoFront()  # Hall of fame for non-dominated solutions
+
+    # Evaluate initial pop
+    fits = toolbox.map(toolbox.evaluate, pop)
+    for ind, fit in zip(pop, fits):
+        ind.fitness.values = fit
+
+    # Initialize ideal point (nadir point in DEAP's terms, lowest value for minimization)
+    # For MOEA/D, it's typically the best (smallest) observed value for each objective so far.
+    ideal_point = np.array([float('inf')] * N_OBJECTIVES) # Initialize with worst possible values
+
+    # Initialize ideal point based on first population's fitness values
+    for ind in pop:
+        # Update ideal point for minimization objectives
+        ideal_point[0] = min(ideal_point[0], ind.fitness.values[0]) # Size
+        ideal_point[3] = min(ideal_point[3], ind.fitness.values[3]) # Time
+        # For maximization objectives, we want to find the max (closest to 0 or positive)
+        # So, the "ideal" for the *negated* objective will be the most negative (worst) value observed.
+        ideal_point[1] = min(ideal_point[1], -ind.fitness.values[1]) # PEAQ (negated)
+        ideal_point[2] = min(ideal_point[2], -ind.fitness.values[2]) # Distortion (negated)
+
+    hof.update(pop) # HOF solutions found during the run
+
+    # 3. Compute neighborhood for each weight vector
+    # This finds the NEIGHBORHOOD_SIZE closest weight vectors for each weight vector
+    neighborhoods = np.array([
+        np.argsort(np.sum(np.abs(moead_weights - w), axis=1))[1:NEIGHBORHOOD_SIZE+1]
+        for w in moead_weights
+    ])
 
     # Statistics
     stats = tools.Statistics(lambda ind: ind.fitness.values)
@@ -391,24 +479,47 @@ def main_evolutionary_algorithm():
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
 
-    # Run the evolutionary algorithm (NSGA-III)
-    print("\n")
-    printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
-    logger.info("GENETIC ALGORITHM STARTED")
-    logger.info(f" Input: {input_wav}")
-    logger.debug(f" Algorithm: {algo}")
-    logger.debug(f" Multi-objective weights: {WEIGHTS}")
-    logger.info(f" Strategy: {strategy_notebook}")
-    logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
-    logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
+    # Main MOEA/D Loop
+    for gen in range(1, MAX_GENERATIONS + 1):
+        # Update ideal point
+        for ind in pop:
+            # Update ideal point for minimization objectives (size, time)
+            ideal_point[0] = min(ideal_point[0], ind.fitness.values[0])
+            ideal_point[3] = min(ideal_point[3], ind.fitness.values[3])
+            # Update ideal point for maximization objectives (PEAQ, distortion)
+            # The ideal point for the *negated* objective will be the most negative (worst) value observed
+            ideal_point[1] = min(ideal_point[1], -ind.fitness.values[1])
+            ideal_point[2] = min(ideal_point[2], -ind.fitness.values[2])
 
-    # Main NSGA-III Loop
-    algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
-                              cxpb=P_CROSSOVER, mutpb=P_MUTATION,
-                              ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
-    # selNSGA3 will handle the selection and archive maintenance internally.
-    # The 'mu' parameter effectively controls the size of the next generation population.
-    
+        # Permute the order of individuals to process
+        order = list(range(POPULATION_SIZE))
+        rnd.shuffle(order)
+
+        for i in order:
+            # Select parents from neighborhood
+            k = rnd.sample(list(neighborhoods[i]), 2) # Select 2 distinct neighbors
+            p1, p2 = pop[k[0]], pop[k[1]]
+
+            # Create offspring
+            offspring = toolbox.mate(toolbox.clone(p1), toolbox.clone(p2))[0]
+            offspring = toolbox.mutate(offspring)[0]
+            del offspring.fitness.values # Clear fitness for re-evaluation
+
+            # Evaluate offspring
+            offspring.fitness.values = toolbox.evaluate(offspring)
+
+            # Update individuals in the neighborhood
+            for j in neighborhoods[i]:
+                # Calculate aggregated fitness for neighbor j and offspring
+                f_j = tchebycheff(pop[j].fitness.values, moead_weights[j], ideal_point)
+                f_offspring = tchebycheff(offspring.fitness.values, moead_weights[j], ideal_point)
+
+                if f_offspring < f_j:
+                    pop[j] = offspring # Replace neighbor with better offspring
+                    # No break here, update all neighbors that offspring improves
+
+        hof.update(pop) # Update the Pareto front with the new population
+
     if df is not None: save_csv(df) # Store final results
 
     # HALL OF FAME (Pareto Front)

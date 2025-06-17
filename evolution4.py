@@ -377,7 +377,6 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 toolbox.register("evaluate", evaluate_ffmpeg_params, input_file_path=input_wav)
 
 # --- PAES Specific Functions ---
-
 def dominates(fitness1, fitness2):
     """
     Returns True if fitness1 dominates fitness2 (i.e., is no worse in all objectives
@@ -401,15 +400,14 @@ def main_evolutionary_algorithm():
     archive = tools.ParetoFront()
     archive.update([current_individual]) # Add the initial individual to the archive
 
+    # Statistics
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("avg", np.mean, axis=0)
     stats.register("std", np.std, axis=0)
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
-    logbook = tools.Logbook()
-    logbook.header = "gen", "evals", "archive_size", "std", "min", "max", "avg"
 
-    # Run the evolutionary algorithm
+    # Run the evolutionary algorithm (PAES)
     print("\n")
     printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
     logger.info("GENETIC ALGORITHM STARTED")
@@ -446,13 +444,9 @@ def main_evolutionary_algorithm():
                 for ind in truncated_archive:
                     archive.update([ind])
 
-        # # Log statistics
-        # record = stats.compile([current_individual] + list(archive)) # Include current and archive in stats
-        # logbook.record(gen=gen, evals=count, archive_size=len(archive), **record)
-        # print(logbook.stream)
-
         if df is not None: save_csv(df) # Store final results
 
+    # HALL OF FAME (Pareto Front) ~ represented by ARCHIVE for PAES algorithm
     print("\n\n")
     printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
     logger.info('HALL OF FAME (Pareto Front)')

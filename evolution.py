@@ -377,16 +377,17 @@ toolbox.register("evaluate", evaluate_ffmpeg_params, input_file_path=input_wav)
 
 # --- Main Evolutionary Algorithm Loop ---
 def main_evolutionary_algorithm():
-    pop = toolbox.population(n=POPULATION_SIZE)
+    pop = toolbox.population(n=POPULATION_SIZE) # Intialize population
     hof = tools.ParetoFront()  # Hall of fame for non-dominated solutions
 
+    # Statistics
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("avg", np.mean, axis=0)
     stats.register("std", np.std, axis=0)
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
 
-    # Run the evolutionary algorithm (NSGA-II))
+    # Run the evolutionary algorithm (NSGA-II)
     print("\n")
     printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
     logger.info("GENETIC ALGORITHM STARTED")
@@ -396,13 +397,16 @@ def main_evolutionary_algorithm():
     logger.info(f" Strategy: {strategy_notebook}")
     logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
     logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
-    # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
+
+    # Main NSGA-II Loop
     algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
                               ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
+    # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
     
     if df is not None: save_csv(df) # Store final results
 
+    # HALL OF FAME (Pareto Front)
     print("\n\n")
     printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
     logger.info('HALL OF FAME (Pareto Front)')
@@ -474,8 +478,6 @@ if __name__ == "__main__":
         logger.setLevel('DEBUG')
         if verbose: print("NOTE: Debug mode enabled by flag.")
 
-    #global input_wav
-    
     if not os.path.exists(input_wav):
         print(f"Error: Input file not found at {input_wav}")
         print("Please update 'input_wav' to a valid path.")

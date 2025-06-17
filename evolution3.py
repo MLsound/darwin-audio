@@ -310,10 +310,6 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 
     if debug: logger.debug(f"FFmpeg Params (after mode handling): {ffmpeg_params}")
 
-    # file_size = float('inf') # Initialize with a large value for minimization
-    # peaq_score = 0.0         # Initialize with a low value for maximization
-    # distortion_index = 0.0   # Initialize with a low value for maximization
-
     # Print current individual and its ffmpeg parameters for debugging/tracking
     print(f"🧬 Evaluating Individual {count}º: {individual}")
     print(f"   FFmpeg Params: {ffmpeg_params}\n")
@@ -377,16 +373,17 @@ toolbox.register("evaluate", evaluate_ffmpeg_params, input_file_path=input_wav)
 
 # --- Main Evolutionary Algorithm Loop ---
 def main_evolutionary_algorithm():
-    pop = toolbox.population(n=POPULATION_SIZE)
+    pop = toolbox.population(n=POPULATION_SIZE) # Intialize population
     hof = tools.ParetoFront()  # Hall of fame for non-dominated solutions
-
+    
+    # Statistics
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("avg", np.mean, axis=0)
     stats.register("std", np.std, axis=0)
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
 
-    # Run the evolutionary algorithm (NSGA-II))
+    # Run the evolutionary algorithm (SPEA2)
     print("\n")
     printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
     logger.info("GENETIC ALGORITHM STARTED")
@@ -396,14 +393,17 @@ def main_evolutionary_algorithm():
     logger.info(f" Strategy: {strategy_notebook}")
     logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
     logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
-    # selSPEA2 will handle the selection and archive maintenance internally.
-    # The 'mu' parameter effectively controls the size of the next generation population.
+
+    # Main SPEA2 Loop
     algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
                               ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
+    # selSPEA2 will handle the selection and archive maintenance internally.
+    # The 'mu' parameter effectively controls the size of the next generation population.
     
     if df is not None: save_csv(df) # Store final results
 
+    # HALL OF FAME (Pareto Front)
     print("\n\n")
     printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
     logger.info('HALL OF FAME (Pareto Front)')
@@ -474,8 +474,6 @@ if __name__ == "__main__":
         debug = True
         logger.setLevel('DEBUG')
         if verbose: print("NOTE: Debug mode enabled by flag.")
-
-    #global input_wav
     
     if not os.path.exists(input_wav):
         print(f"Error: Input file not found at {input_wav}")
