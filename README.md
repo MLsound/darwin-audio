@@ -45,11 +45,13 @@ For system-level tools, you'll need to use your operating system's package manag
 
 ## 📂 Project Structure
 
-* `evolution.py`: Implements the core multi-objective evolutionary algorithm (NSGA-II) using `DEAP`. It defines the genes (audio compression parameters) and orchestrates the evaluation of individuals.
+* `evolution.py`: This project now includes multiple scripts for different multi-objective evolutionary algorithms. `evolution.py` (and its numbered variants like `evolution2.py`, `evolution3.py`, `evolution4.py`, `evolution5.py`) implements the core multi-objective evolutionary algorithms (NSGA-II, NSGA-III, SPEA2, PAES, and MOEA-D, respectively) using `DEAP`. These scripts define the genes (audio compression parameters) and orchestrate the evaluation of individuals for their specific algorithms.
 * `orchestrator.py`: Acts as the central hub for the evaluation process. It calls `compressor.py` to compress audio and `peaq.py` to assess the quality of the compressed file. It also measures file size and total processing time.
 * `compressor.py`: Handles the actual audio compression from WAV to MP3 using `ffmpeg-python`, applying the parameters specified by the evolutionary algorithm.
 * `peaq.py`: Provides an interface to the external `peaq` command-line tool, used for objective perceptual audio quality measurements. It also manages environment variables for correct tool execution.
+* `logger.py`: A module dedicated to the centralized configuration and management of loggers. It defines the setup_logger function to create and configure loggers with outputs to files and/or the console, enabling unified and consistent logging of events, debugging, and important information throughout the entire project.
 * `audiofile_analysis.ipynb`: A Jupyter Notebook for quick analysis of audio file properties (e.g., sample rate, bitrate) using `pydub`.
+* `graph.ipynb`: A Jupyter Notebook for visualizing the results of the evolutionary algorithms, such as Pareto fronts and fitness landscapes.
 * `./media/`: Directory intended for input WAV files and generated MP3 output files.
 * `./logs/`: Contains log files (.log) detailing the execution flow, debugging information, and significant events of the evolutionary algorithm. Each run generates a timestamped log file.
 * `./history/`: Stores CSV files (.csv) containing the full evolutionary history, including parameters, fitness values (file size, PEAQ score, distortion index), and processing time for each evaluated individual. Each run generates a timestamped CSV for distinct record-keeping.
