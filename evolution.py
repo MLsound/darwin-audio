@@ -44,8 +44,9 @@ input_wav = "./media/4test.wav" # String concert recording (11sec|96kHz|24bits)
 #input_wav = "./media/Shining_moon.wav" # Band Studio recording (4min|44,1kHz|16bits) aka 2test
 #input_wav = "./media/Mamita.wav" # Band Homestudio recording (2min|44,1kHz|24bits) aka 3test
 #input_wav = "./media/Bartok.wav" # String concert (33min|96kHz|24bits) aka 4test
-#input_wav = "./media/Bffmpeg -ss 00:00:00 -i Bartok_cut.wav -to 00:00:12 -c:a pcm_s32le 4test.wavartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
+#input_wav = "./media/Bartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
     
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # # FOR TESTING PURPOSES:
