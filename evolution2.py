@@ -1,4 +1,4 @@
-# NSGA-II
+# NSGA-III
 import os
 import random as rnd
 import numpy as np
@@ -18,7 +18,7 @@ from datetime import datetime
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
-algo = "NSGA-II"
+algo = "NSGA-III"
 strategy_notebook = "Exploring different algorithms."
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
@@ -34,46 +34,18 @@ TOTAL_RUNS = POPULATION_SIZE*MAX_GENERATIONS # Total amount of individuals to te
 # ---------- Audio File Selector ----------
 # Test files:
 # Input WAV file path (any music file in WAV format)
-input_wav = "./media/test.wav" # For development purposes only (5sec|32kHz|16bits)
+# input_wav = "./media/test.wav" # For development purposes only (5sec|32kHz|16bits)
 # input_wav = "./media/2test.wav" # Studio recording (10sec|44,1kHz|16bits)
 # input_wav = "./media/3test.wav" # Homestudio recording (15sec|44,1kHz|24bits)
-# input_wav = "./media/4test.wav" # String concert recording (11sec|96kHz|24bits)
+input_wav = "./media/4test.wav" # String concert recording (11sec|96kHz|24bits)
 
 # Full songs:
 #input_wav = "./media/Valicha.wav" # Piano song (4.5min|44,1kHz|24bits)
 #input_wav = "./media/Shining_moon.wav" # Band Studio recording (4min|44,1kHz|16bits) aka 2test
 #input_wav = "./media/Mamita.wav" # Band Homestudio recording (2min|44,1kHz|24bits) aka 3test
 #input_wav = "./media/Bartok.wav" # String concert (33min|96kHz|24bits) aka 4test
-#input_wav = "./media/Bartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
-
-# Setup the logger for the evolutionary algorithm
-logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
-                    level='DEBUG' if debug else 'INFO', console_output=verbose)
-count = 1 # Counter for evaluations, used for tracking
-total_time = None
-df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time', 'fitness'])
-hof_df = df.copy() # Hall of fame DataFrame for best individuals
-
-def save_csv(data, csv_file=f'history/{history_filename}.csv'):
-    """
-    Saves the DataFrame to a CSV file.
-    Args:
-        data (pd.DataFrame): The DataFrame to save.
-        csv_file (str): The name of the CSV file to save the DataFrame to.
-    """
-    if not csv_file.endswith('.csv'):
-        csv_file = f"{csv_file}.csv"
-    if data is None or data.empty:
-        print("DataFrame is empty. No data to save.")
-        return
-    # Ensure the directory exists
-    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
-    # Save the DataFrame to CSV
-    data.to_csv(csv_file, index=False)
-    if verbose: print(f"Saving DataFrame to {csv_file}...")
-    logger.debug(f"(+) Saved DataFrame into {csv_file}")
+#input_wav = "./media/Bffmpeg -ss 00:00:00 -i Bartok_cut.wav -to 00:00:12 -c:a pcm_s32le 4test.wavartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
     
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # # FOR TESTING PURPOSES:
@@ -145,6 +117,15 @@ LOW_MODE_VAL, UP_MODE_VAL = 0.0, 320.0 # Max bitrate for CBR, max quality value 
 # Total Number of Dimensions/Genes
 N_DIM = 6 # (ar, sample_fmt, compression_level, reservoir, encoding_mode, mode_value)
 
+# ---------- Intializer ----------
+# Setup the logger for the evolutionary algorithm
+logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
+                    level='DEBUG' if debug else 'INFO', console_output=verbose)
+count = 1 # Counter for evaluations, used for tracking
+total_time = None
+df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time', 'fitness'])
+hof_df = df.copy() # Hall of fame DataFrame for best individuals
+
 # --- Fitness Function ---
 def compute_z_score(file_size, peaq_score, distortion_index, processing_time):
     """
@@ -192,6 +173,25 @@ def compute_fitness(z_scores):
     #weights = [-0.5, 1.0, 0.3, -0.05]
     return sum(w * z for w, z in zip(WEIGHTS, z_scores))
 
+def save_csv(data, csv_file=f'history/{history_filename}.csv'):
+    """
+    Saves the DataFrame to a CSV file.
+    Args:
+        data (pd.DataFrame): The DataFrame to save.
+        csv_file (str): The name of the CSV file to save the DataFrame to.
+    """
+    if not csv_file.endswith('.csv'):
+        csv_file = f"{csv_file}.csv"
+    if data is None or data.empty:
+        print("DataFrame is empty. No data to save.")
+        return
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
+    # Save the DataFrame to CSV
+    data.to_csv(csv_file, index=False)
+    if verbose: print(f"Saving DataFrame to {csv_file}...")
+    logger.debug(f"(+) Saved DataFrame into {csv_file}")
+
 # --- DEAP Configuration ---
 # Define the objectives: minimize size, maximize PEAQ, maximize Distortion Index, MINIMIZE PROCESSING TIME
 # weights=(-1.0, 1.0, 1.0, -1.0) means:
@@ -224,7 +224,11 @@ toolbox.register("individual", tools.initCycle, creator.Individual,
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 # Genetic Operators
-toolbox.register("select", tools.selNSGA2)
+# NSGA-III requires reference points
+# The number of objectives is 4 (Size, PEAQ, Distortion, Time)
+N_OBJECTIVES = 4
+REF_POINTS = tools.uniform_reference_points(N_OBJECTIVES, p=12) # 'p' is the number of divisions along each axis. Adjust as needed.
+toolbox.register("select", tools.selNSGA3, ref_points=REF_POINTS)
 
 # Bounds for crossover and mutation (must match N_DIM)
 # Ensure they are in the order of gene generation
@@ -387,7 +391,7 @@ def main_evolutionary_algorithm():
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
 
-    # Run the evolutionary algorithm (NSGA-II)
+    # Run the evolutionary algorithm (NSGA-III)
     print("\n")
     printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
     logger.info("GENETIC ALGORITHM STARTED")
@@ -398,11 +402,12 @@ def main_evolutionary_algorithm():
     logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
     logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
 
-    # Main NSGA-II Loop
+    # Main NSGA-III Loop
     algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
                               cxpb=P_CROSSOVER, mutpb=P_MUTATION,
                               ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
-    # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
+    # selNSGA3 will handle the selection and archive maintenance internally.
+    # The 'mu' parameter effectively controls the size of the next generation population.
     
     if df is not None: save_csv(df) # Store final results
 

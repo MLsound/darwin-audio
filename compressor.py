@@ -29,14 +29,14 @@ def convert_wav_to_mp3(input_file: str,
         comp_logger = getLogger(log_file.name,'comp')
         comp_logger.addHandler(get_handler()) # Allowing console printing
         if verbose: comp_logger.debug('COMPRESSOR module loaded.')
-
+        
     # ffmpeg-python handles the underlying ffmpeg process.
     # It will raise an ffmpeg.Error if ffmpeg is not found or if the command fails.
 
     start = perf_counter()
 
     if params is not None:
-        if verbose: print(f"Processing with parameters: {params}")
+        if verbose: print(f"Parameters: {params}")
     else:
         print("No additional parameters provided, using default settings.")
         params = {
@@ -50,6 +50,8 @@ def convert_wav_to_mp3(input_file: str,
         message = f"Error: Input file not found at '{input_file}'"
         print(message)
         return False, message
+    
+    if verbose: comp_logger.debug(f">> Running command: acodec='libmp3lame', {', '.join(params)}")
     
     try:
         (

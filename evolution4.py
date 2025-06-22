@@ -1,4 +1,4 @@
-# NSGA-II
+# PAES
 import os
 import random as rnd
 import numpy as np
@@ -18,62 +18,35 @@ from datetime import datetime
 verbose = False # Set to True for detailed output
 debug = False # Set to True for debugging mode, which saves outputs in an 'output' folder
 
-algo = "NSGA-II"
+algo = "PAES"
 strategy_notebook = "Exploring different algorithms."
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 history_filename = f"evolution_{algo}_{timestamp}"
 WEIGHTS = [-0.5, 1.0, 0.3, -0.05]
 
 # --- Evolutionary Algorithm Parameters ---
-POPULATION_SIZE = 50
-MAX_GENERATIONS = 100
-P_CROSSOVER = 0.95  # Probabilidad de cruce
-P_MUTATION = 0.01   # Probabilidad de mutación
-TOTAL_RUNS = POPULATION_SIZE*MAX_GENERATIONS # Total amount of individuals to test
+ARCHIVE_CAPACITY = 50 # Maximum size of the archive (PAES parameter)
+#POPULATION_SIZE = 50 # No longer needed
+MAX_GENERATIONS = 5000 # Total number of evaluations/iterations for PAES
+#P_CROSSOVER = 0.95  # No longer needed
+P_MUTATION = 0.5 # Mutation probability, often higher in PAES
+TOTAL_RUNS = MAX_GENERATIONS # Total amount of individuals to test
 
 # ---------- Audio File Selector ----------
 # Test files:
 # Input WAV file path (any music file in WAV format)
-input_wav = "./media/test.wav" # For development purposes only (5sec|32kHz|16bits)
+# input_wav = "./media/test.wav" # For development purposes only (5sec|32kHz|16bits)
 # input_wav = "./media/2test.wav" # Studio recording (10sec|44,1kHz|16bits)
 # input_wav = "./media/3test.wav" # Homestudio recording (15sec|44,1kHz|24bits)
-# input_wav = "./media/4test.wav" # String concert recording (11sec|96kHz|24bits)
+input_wav = "./media/4test.wav" # String concert recording (11sec|96kHz|24bits)
 
 # Full songs:
 #input_wav = "./media/Valicha.wav" # Piano song (4.5min|44,1kHz|24bits)
 #input_wav = "./media/Shining_moon.wav" # Band Studio recording (4min|44,1kHz|16bits) aka 2test
 #input_wav = "./media/Mamita.wav" # Band Homestudio recording (2min|44,1kHz|24bits) aka 3test
 #input_wav = "./media/Bartok.wav" # String concert (33min|96kHz|24bits) aka 4test
-#input_wav = "./media/Bartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
-
-# Setup the logger for the evolutionary algorithm
-logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
-                    level='DEBUG' if debug else 'INFO', console_output=verbose)
-count = 1 # Counter for evaluations, used for tracking
-total_time = None
-df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time', 'fitness'])
-hof_df = df.copy() # Hall of fame DataFrame for best individuals
-
-def save_csv(data, csv_file=f'history/{history_filename}.csv'):
-    """
-    Saves the DataFrame to a CSV file.
-    Args:
-        data (pd.DataFrame): The DataFrame to save.
-        csv_file (str): The name of the CSV file to save the DataFrame to.
-    """
-    if not csv_file.endswith('.csv'):
-        csv_file = f"{csv_file}.csv"
-    if data is None or data.empty:
-        print("DataFrame is empty. No data to save.")
-        return
-    # Ensure the directory exists
-    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
-    # Save the DataFrame to CSV
-    data.to_csv(csv_file, index=False)
-    if verbose: print(f"Saving DataFrame to {csv_file}...")
-    logger.debug(f"(+) Saved DataFrame into {csv_file}")
+#input_wav = "./media/Bffmpeg -ss 00:00:00 -i Bartok_cut.wav -to 00:00:12 -c:a pcm_s32le 4test.wavartok_cut.wav" # String concert recording (30sec|96kHz|24bits)
     
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # # FOR TESTING PURPOSES:
@@ -145,6 +118,15 @@ LOW_MODE_VAL, UP_MODE_VAL = 0.0, 320.0 # Max bitrate for CBR, max quality value 
 # Total Number of Dimensions/Genes
 N_DIM = 6 # (ar, sample_fmt, compression_level, reservoir, encoding_mode, mode_value)
 
+# ---------- Intializer ----------
+# Setup the logger for the evolutionary algorithm
+logger = setup_logger(algo, log_file=f"logs/{history_filename}.log",
+                    level='DEBUG' if debug else 'INFO', console_output=verbose)
+count = 1 # Counter for evaluations, used for tracking
+total_time = None
+df = pd.DataFrame(columns=['params', 'file_size', 'peaq_score', 'distortion_index', 'processing_time', 'fitness'])
+hof_df = df.copy() # Hall of fame DataFrame for best individuals
+
 # --- Fitness Function ---
 def compute_z_score(file_size, peaq_score, distortion_index, processing_time):
     """
@@ -192,6 +174,25 @@ def compute_fitness(z_scores):
     #weights = [-0.5, 1.0, 0.3, -0.05]
     return sum(w * z for w, z in zip(WEIGHTS, z_scores))
 
+def save_csv(data, csv_file=f'history/{history_filename}.csv'):
+    """
+    Saves the DataFrame to a CSV file.
+    Args:
+        data (pd.DataFrame): The DataFrame to save.
+        csv_file (str): The name of the CSV file to save the DataFrame to.
+    """
+    if not csv_file.endswith('.csv'):
+        csv_file = f"{csv_file}.csv"
+    if data is None or data.empty:
+        print("DataFrame is empty. No data to save.")
+        return
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
+    # Save the DataFrame to CSV
+    data.to_csv(csv_file, index=False)
+    if verbose: print(f"Saving DataFrame to {csv_file}...")
+    logger.debug(f"(+) Saved DataFrame into {csv_file}")
+
 # --- DEAP Configuration ---
 # Define the objectives: minimize size, maximize PEAQ, maximize Distortion Index, MINIMIZE PROCESSING TIME
 # weights=(-1.0, 1.0, 1.0, -1.0) means:
@@ -221,10 +222,10 @@ toolbox.register("individual", tools.initCycle, creator.Individual,
                   toolbox.attr_reservoir,
                   toolbox.attr_encoding_mode,
                   toolbox.attr_mode_value), n=1)
-toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+#toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
 # Genetic Operators
-toolbox.register("select", tools.selNSGA2)
+# PAES typically uses only mutation. Crossover is not common.
 
 # Bounds for crossover and mutation (must match N_DIM)
 # Ensure they are in the order of gene generation
@@ -233,10 +234,10 @@ toolbox.register("select", tools.selNSGA2)
 LOW_BOUNDS = [LOW_SR_IDX, LOW_SF, LOW_CL, LOW_RES, LOW_EM, LOW_MODE_VAL]
 UP_BOUNDS = [UP_SR_IDX, UP_SF, UP_CL, UP_RES, UP_EM, UP_MODE_VAL]
 
-toolbox.register("mate", tools.cxSimulatedBinaryBounded,
-                 low=LOW_BOUNDS, up=UP_BOUNDS, eta=20.0)
+# toolbox.register("mate", tools.cxSimulatedBinaryBounded,
+#                  low=LOW_BOUNDS, up=UP_BOUNDS, eta=20.0)
 toolbox.register("mutate", tools.mutPolynomialBounded,
-                  low=LOW_BOUNDS, up=UP_BOUNDS, eta=20.0, indpb=0.1)
+                  low=LOW_BOUNDS, up=UP_BOUNDS, eta=20.0, indpb=P_MUTATION)
 
 # --- Evaluation Function ---
 def evaluate_ffmpeg_params(individual, input_file_path):
@@ -375,10 +376,29 @@ def evaluate_ffmpeg_params(individual, input_file_path):
 # Register the evaluation function with the toolbox
 toolbox.register("evaluate", evaluate_ffmpeg_params, input_file_path=input_wav)
 
+# --- PAES Specific Functions ---
+def dominates(fitness1, fitness2):
+    """
+    Returns True if fitness1 dominates fitness2 (i.e., is no worse in all objectives
+    and strictly better in at least one).  Assumes minimization.
+    """
+    # Adjust for maximization objectives (PEAQ, Distortion)
+    adjusted_fitness1 = (-fitness1[0], fitness1[1], fitness1[2], -fitness1[3])
+    adjusted_fitness2 = (-fitness2[0], fitness2[1], fitness2[2], -fitness2[3])
+
+    worse_or_equal = all(f1 <= f2 for f1, f2 in zip(adjusted_fitness1, adjusted_fitness2))
+    strictly_better = any(f1 < f2 for f1, f2 in zip(adjusted_fitness1, adjusted_fitness2))
+    return worse_or_equal and strictly_better
+
 # --- Main Evolutionary Algorithm Loop ---
 def main_evolutionary_algorithm():
-    pop = toolbox.population(n=POPULATION_SIZE) # Intialize population
-    hof = tools.ParetoFront()  # Hall of fame for non-dominated solutions
+    # 1. Initialize current individual randomly
+    current_individual = toolbox.individual()
+    current_individual.fitness.values = toolbox.evaluate(current_individual)
+
+    # 2. Initialize archive (Pareto front)
+    archive = tools.ParetoFront()
+    archive.update([current_individual]) # Add the initial individual to the archive
 
     # Statistics
     stats = tools.Statistics(lambda ind: ind.fitness.values)
@@ -387,7 +407,7 @@ def main_evolutionary_algorithm():
     stats.register("min", np.min, axis=0)
     stats.register("max", np.max, axis=0)
 
-    # Run the evolutionary algorithm (NSGA-II)
+    # Run the evolutionary algorithm (PAES)
     print("\n")
     printt(f"🪺  Starting Evolutionary Algorithm ({algo})  🦕", n=60, char="· ~ ")
     logger.info("GENETIC ALGORITHM STARTED")
@@ -395,23 +415,43 @@ def main_evolutionary_algorithm():
     logger.debug(f" Algorithm: {algo}")
     logger.debug(f" Multi-objective weights: {WEIGHTS}")
     logger.info(f" Strategy: {strategy_notebook}")
-    logger.info(f" Population Size: {POPULATION_SIZE}, Max Generations: {MAX_GENERATIONS}")
-    logger.info(f" Crossover Probability: {P_CROSSOVER}, Mutation Probability: {P_MUTATION}")
+    logger.info(f" Archive Capacity: {ARCHIVE_CAPACITY}, Max Generations: {MAX_GENERATIONS}")
+    logger.info(f" Crossover Probability: N/A, Mutation Probability: {P_MUTATION}")
 
-    # Main NSGA-II Loop
-    algorithms.eaMuPlusLambda(pop, toolbox, mu=POPULATION_SIZE, lambda_=POPULATION_SIZE,
-                              cxpb=P_CROSSOVER, mutpb=P_MUTATION,
-                              ngen=MAX_GENERATIONS, stats=stats, halloffame=hof, verbose=True)
-    # Using eaMuPlusLambda as before, which is suitable for NSGA-II's non-dominated sorting.
-    
-    if df is not None: save_csv(df) # Store final results
+    # Main PAES Loop
+    for gen in range(1, MAX_GENERATIONS + 1):
+        # 3. Generate offspring by mutating the current individual
+        offspring = toolbox.mutate(toolbox.clone(current_individual))[0]
+        offspring.fitness.values = toolbox.evaluate(offspring)
 
-    # HALL OF FAME (Pareto Front)
+        # 4. Compare offspring with current individual
+        if dominates(offspring.fitness.values, current_individual.fitness.values):
+            # Offspring dominates current, replace current with offspring
+            current_individual = offspring
+        elif dominates(current_individual.fitness.values, offspring.fitness.values):
+            # Current dominates offspring, keep current
+            pass # Do nothing
+        else:
+            # Neither dominates the other
+            # Add offspring to the archive
+            archive.update([offspring])
+            # If archive is full, truncate it
+            if len(archive) > ARCHIVE_CAPACITY:
+                archive.sort(key=lambda ind: ind.fitness.values) # Sort by fitness (DEAP's ParetoFront doesn't sort automatically)
+                # Use selNSGA2 to truncate based on crowding distance
+                truncated_archive = tools.selNSGA2(list(archive), ARCHIVE_CAPACITY)
+                archive.clear()
+                for ind in truncated_archive:
+                    archive.update([ind])
+
+        if df is not None: save_csv(df) # Store final results
+
+    # HALL OF FAME (Pareto Front) ~ represented by ARCHIVE for PAES algorithm
     print("\n\n")
     printt("🏆 Best Non-Dominated Individuals (Pareto Front)")
     logger.info('HALL OF FAME (Pareto Front)')
     hof_count = 0
-    for ind in hof:
+    for ind in archive:
         # Reconstruct and print human-readable parameters for the best individuals
         sample_rate_idx = int(round(ind[0]))
         sample_rate_idx = max(LOW_SR_IDX, min(UP_SR_IDX, sample_rate_idx)) # Clamp for display
@@ -464,7 +504,7 @@ def main_evolutionary_algorithm():
         save_csv(hof_df, csv_file=f'results/{history_filename.replace("evolution","results")}.csv')
         hof_count +=1
 
-    return pop, stats, hof
+    return [current_individual], stats, archive
 
 if __name__ == "__main__":
 
@@ -478,6 +518,8 @@ if __name__ == "__main__":
         logger.setLevel('DEBUG')
         if verbose: print("NOTE: Debug mode enabled by flag.")
 
+    #global input_wav
+    
     if not os.path.exists(input_wav):
         print(f"Error: Input file not found at {input_wav}")
         print("Please update 'input_wav' to a valid path.")
