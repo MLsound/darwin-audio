@@ -3,19 +3,24 @@ This project aims to optimize the compression of WAV audio files to MP3 using Pe
 
 This is achieved through an automated framework that employs an evolutionary algorithm. This algorithm intelligently explores various FFmpeg (specifically, LAME MP3) encoding settings to identify optimal trade-offs. The framework orchestrates the entire process: it handles audio compression, evaluates the resulting audio quality using the specified metrics, and then leverages genetic algorithms to converge on a set of Pareto-optimal compression configurations specifically tailored to the input audio content. This approach helps users achieve a balance between file efficiency and listening experience.
 
+## 📄 Documentation
+
+A comprehensive report detailing the methodology, implementation, and results of this project is available in both Spanish and English. 
+* **Spanish Report:** [Informe de Optimización Multiobjetivo en Audio](./Informe_Optimizacion_Audio_ES.pdf)
+* **English Report:** [Multi-Objective Audio Optimization Report](./Report_Audio_Optimization_EN.pdf)
+
 ## 🎓 Project Context
 
 This framework was developed as the **final project for the "Evolutionary Algorithms" course** in the **Master's in Artificial Intelligence program** at the Faculty of Engineering, University of Buenos Aires (FIUBA, UBA). It was completed under the guidance of **Prof. Miguel Augusto Azar** (2025).
 
----
+
+## 📦 Requirements
 
 ❕Before running this project, you'll first need to successfully install the GST Peaq plugin for the GStreamer framework. That's no easy task, so I prepared a step-by-step guide to help with that purpose.
 
 ▸ [***Installation guide for GST Peaq & GStreamer***](./GStreamer_install.md)
 
 ---
-
-## 📦 Requirements
 
 The requirements could be installed through either `environment.yml` or `requirements.txt`
 
@@ -46,8 +51,6 @@ For system-level tools, you'll need to use your operating system's package manag
   - `libtool`
   - `gtk-doc`
   - `make`
-
----
 
 ## 📂 Project Structure
 
