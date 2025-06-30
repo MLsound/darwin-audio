@@ -9,10 +9,12 @@ A comprehensive report detailing the methodology, implementation, and results of
 * **Spanish Report:** [Informe de Optimización Multiobjetivo en Audio](./Informe_Optimizacion_Audio_ES.pdf)
 * **English Report:** [Multi-Objective Audio Optimization Report](./Report_Audio_Optimization_EN.pdf)
 
+### Example Application
+To demonstrate the project's functionality, two sample audio files have been included in the repository: `Bartok_cut.wav` (the original input file) and `Bartok_cut.mp3` (the optimal compression result). These files illustrate the outcome of the optimization process described in the project.
+
 ## 🎓 Project Context
 
 This framework was developed as the **final project for the "Evolutionary Algorithms" course** in the **Master's in Artificial Intelligence program** at the Faculty of Engineering, University of Buenos Aires (FIUBA, UBA). It was completed under the guidance of **Prof. Miguel Augusto Azar** (2025).
-
 
 ## 📦 Requirements
 

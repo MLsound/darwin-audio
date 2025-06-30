@@ -6,6 +6,4 @@
 
 # Audio files
 /media
-*.mp3
-*.wav
 *.flac
